@@ -147,7 +147,7 @@ $land_ownership_status = $_POST["land_ownership_status"];
         ?>
         <form method="post">
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Household Number ni ATE GLAYSA!!</label>
+                <label class="col-sm-3 col-form-label">Household Number ni ATE GLAYSA and KUYA J!!</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="household number" value="<?php echo $household_number; ?>">
                 </div>
