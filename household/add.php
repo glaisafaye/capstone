@@ -168,7 +168,7 @@ $land_ownership_status = $_POST["land_ownership_status"];
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="total_members" value="<?php echo $total_members; ?>">
                 </div>
-            </div>
+            </div> 
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Head of the Family</label>
                 <div class="col-sm-6">
