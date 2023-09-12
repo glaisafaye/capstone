@@ -9,13 +9,11 @@ $connection = new mysqli($servername, $username, $password, $database);
 
 $fname = "";
 $lname = "";
-$email = "";
+$mname = "";
 $phone = "";
-$address = "";
 $gender = "";
 $birthday = "";
 $civil_status = "";
-$blood_type = "";
 $household_number = "";
 $differently_abled_person = "";
 $zone = "";
@@ -27,8 +25,6 @@ $income = "";
 $educational_attainment = "";
 $remarks = "";
 $nationality = "";
-$philhealth_number = "";
-
 
 $errorMessage = "";
 $successMessage = "";
@@ -36,13 +32,11 @@ $successMessage = "";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fname = isset($_POST["fname"]) ? $_POST["fname"] : "";
     $lname = isset($_POST["lname"]) ? $_POST["lname"] : "";
-    $email = $_POST["email"];
+    $mname = $_POST["mname"]; 
     $phone = $_POST["phone"];
-    $address = $_POST["address"];
     $gender = $_POST["gender"];
     $birthday = $_POST["birthday"];
     $civil_status = $_POST["civil_status"];
-    $blood_type = $_POST["blood_type"];
     $household_number = $_POST["household_number"];
     $differently_abled_person = $_POST["differently_abled_person"];
     $zone = $_POST["zone"];
@@ -54,26 +48,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $educational_attainment = $_POST["educational_attainment"];
     $remarks = $_POST["remarks"];
     $nationality  = $_POST["nationality"];
-    $philhealth_number = $_POST["philhealth_number"];
-    
 
     if (isset($_POST["submit"])) {
         
-        $sql = "INSERT INTO residents (`fname`, `lname`, `email`, `phone`, `address`, `gender`, `birthday`, `civil_status`, `blood_type`, `household_number`, `differently_abled_person`, `zone`, `total_household_member`, `relationship_to_head`, `employment_status`, `religion`, `income`, `educational_attainment`, `remarks`, `nationality`, `philhealth_number`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO residents (`fname`, `lname`, `mname`, `phone`, `gender`, `birthday`, `civil_status`, `household_number`, `differently_abled_person`, `zone`, `total_household_member`, `relationship_to_head`, `employment_status`, `religion`, `income`, `educational_attainment`, `remarks`, `nationality`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         $stmt = $connection->prepare($sql);
 
         $stmt->bind_param(
-            "sssssssssssssssssssssssssss",
+            "ssssssssssssssssss",
             $fname,
             $lname,
-            $email,
+            $mname,
             $phone,
-            $address,
             $gender,
             $birthday,
             $civil_status,
-            $blood_type,
             $household_number,
             $differently_abled_person,
             $zone,
@@ -85,7 +75,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $educational_attainment,
             $remarks,
             $nationality,
-            $philhealth_number,
         );
 
         $result = $stmt->execute();
@@ -169,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </style>
     <script>
         function validateForm() {
-            var requiredFields = ["fname", "lname", "email", "phone", "address"];
+            var requiredFields = ["fname", "lname", "phone"];
             for (var i = 0; i < requiredFields.length; i++) {
                 var fieldName = requiredFields[i];
                 var fieldValue = document.forms["residentForm"][fieldName].value;
@@ -196,21 +185,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ?>
 
 <form class="" action="" method="post" autocomplete="off" enctype="multipart/form-data" onsubmit="return validateForm();">
-            
-    <div class="row mb-3">
-        <div class="col-md-4">
-            <label class="form-label">First Name</label>
-            <input type="text" class="form-control" name="fname" value="<?php echo $fname; ?>">
-        </div>
+
+        <div class="row mb-3">
         <div class="col-md-4">
             <label class="form-label">Last Name</label>
             <input type="text" class="form-control" name="lname" value="<?php echo $lname; ?>">
         </div>
         <div class="col-md-4">
-            <label class="form-label">Email</label>
-            <input type="text" class="form-control" name="email" value="<?php echo $email; ?>">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-control" name="fname" value="<?php echo $fname; ?>">
         </div>
-    </div>
+        <div class="col-md-4">
+            <label class="form-label">Middle Name</label>
+            <input type="text" class="form-control" name="mname" value="<?php echo $mname; ?>">
+        </div>
     <div class="row mb-3">
         <div class="col-md-4">
             <label class="form-label">Phone</label>
@@ -218,20 +206,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
         <div class="col-md-4">
             <label class="form-label">Gender</label>
-            <div class="form-check">
-                <input type="radio" class="form-check-input" name="gender" value="Male" <?php if ($gender === 'Male') echo 'checked'; ?>>
-                <label class="form-check-label">Male</label>
-            </div>
-            <div class="form-check">
-                <input type="radio" class="form-check-input" name="gender" value="Female" <?php if ($gender === 'Female') echo 'checked'; ?>>
-                <label class="form-check-label">Female</label>
-            </div>
+            <select class="form-select" name="gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
         </div>
-        <div class="col-md-4">
-            <label class="form-label">Address</label>
-            <input type="text" class="form-control" name="address" value="<?php echo $address; ?>">
-        </div>
-    </div>
     <div class="row mb-3">
         <div class="col-md-4">
             <label class="form-label">Civil Status</label>
@@ -246,15 +225,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label class="form-label">Birthday</label>
                     <input id="Birthday" name="birthday" class="form-control" type="date" placeholder="birthday" value="<?php echo $birthday; ?>">
                 </div>
-                <div class="col-md-4">
-            <label class="form-label">Blood Type</label>
-            <select class="form-select" name="blood_type">
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="AB">AB</option>
-                <option value="O">O</option>
-            </select>
-        </div>
                 <div class="col-md-4">
                     <label class="col-sm-3 col-form-label">Household Number</label>
                     <input type="text" class="form-control" name="household_number" value="<?php echo $household_number; ?>">
@@ -284,9 +254,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label class="col-sm-3 col-form-label">Relationship to Head</label>            
                     <input type="text" class="form-control" name="relationship_to_head" value="<?php echo $relationship_to_head; ?>">
                 </div>
-                <div class="col-sm-4">
-                    <label class="col-sm-3 col-form-label">Employment Status</label>
-                    <input type="text" class="form-control" name="employment_status" value="<?php echo $employment_status; ?>">
+                <div class="col-md-4">
+                        <label class="form-label">Employment Status</label>
+                    <select class="form-select" name="employment_status">
+                        <option value="Employed">Employed</option>
+                        <option value="Unemployed">Unemployed</option>
+                        </select>
                 </div>
                 <div class="col-sm-4">
                     <label class="col-sm-3 col-form-label">Religion</label>               
@@ -310,7 +283,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <option value="College_Level">College Level</option>
                 <option value="College_Graduate">College Graduate</option>
             </select>
-        </div>        
+        </div>
                 <div class="col-sm-4">
                     <label class="col-sm-3 col-form-label">Remarks</label>
                     <input type="text" class="form-control" name="remarks" value="<?php echo $remarks; ?>">
@@ -319,12 +292,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label class="col-sm-3 col-form-label">Nationality</label>
                     <input type="text" class="form-control" name="nationality" value="<?php echo $nationality; ?>">
                </div>
-                <div class="col-sm-4">
-                    <label class="col-sm-3 col-form-label">Philhealth Number</label>
-                    <input type="text" class="form-control" name="philhealth_number" value="<?php echo $philhealth_number; ?>">
-               </div>
-                
-               
 
 
 <?php
