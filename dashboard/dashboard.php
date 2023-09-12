@@ -154,20 +154,20 @@
     }
 
     .charts {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-gap: 20px;
-        width: 100%;
-        padding: 20px;
-        padding-top: 0;
-    }
-    .chart{
-        background: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-        width: 100%
-    }
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .chart {
+            flex-basis: calc(50% - 20px);
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
 </style>
 
 </head>
@@ -280,19 +280,39 @@
         ?>
         </div>
             <div class="charts">
-                <div class="chart" id= "line-chart">
-                    <h2>Population by Civil Status</h2>
+                <div class="chart">
+                    <h2>Total Population</h2>
                     <canvas id="lineChart"></canvas>
                 </div>
                 <div class="chart" id="doughnut-chart">
-                    <h2>Total Residents</h2>
+                    <h2>Household Population</h2>
                     <canvas id="doughnut"></canvas>
+                </div>
+                <div class="chart" id="doughnut-chart">
+                    <h2>Total Residents Per Zone</h2>
+                    <canvas id="doughnut1"></canvas>
+                </div>
+                <div class="chart">
+                    <h2>Population by Civil Status</h2>
+                    <canvas id="lineChart1"></canvas>
+                </div>
+                <div class="chart">
+                    <h2>Income Ratio</h2>
+                    <canvas id="doughnut2"></canvas>
+                </div>
+                <div class="chart">
+                    <h2>Population by Age</h2>
+                    <canvas id="lineChart1"></canvas>
                 </div>
             </div>
         </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="chart1.js"></script>
     <script src="chart2.js"></script>
+    <script src="chart3.js"></script>
+    <script src="chart4.js"></script>
+    <script src="chart5.js"></script>
+    <script src="chart6.js"></script>
     </div>
 </div>
 
