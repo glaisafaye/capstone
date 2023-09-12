@@ -16,7 +16,6 @@ $connection = new mysqli($servername, $username, $password, $database);
     $sanitary_toilet = "";
     $water_usage = "";
     $house_ownership_status = "";
-    $dwelling_type = "";
     $land_ownership_status = "";
 
     $errorMessage = "";
@@ -29,18 +28,17 @@ $connection = new mysqli($servername, $username, $password, $database);
         $head_of_the_family = $_POST["head_of_the_family"];
         $household_income = $_POST["household_income"];
         $sanitary_toilet = $_POST["sanitary_toilet"];
-$water_usage = $_POST["water_usage"];
-$house_ownership_status = $_POST["house_ownership_status"];
-$dwelling_type = $_POST["dwelling_type"];
-$land_ownership_status = $_POST["land_ownership_status"];
+        $water_usage = $_POST["water_usage"];
+        $house_ownership_status = $_POST["house_ownership_status"];
+        $land_ownership_status = $_POST["land_ownership_status"];
 
     }
-        if (empty($household_number) || empty($zone) || empty($total_members) || empty($head_of_the_family)) {
+        if (empty($household_number) || empty($zone) || empty($total_members) || empty($head_of_the_family) || empty($sanitary_toilet) || empty($water_usage) || empty($house_ownership_status) || empty($land_ownership_status)) {
             $errorMessage = "All fields are required";
         } else {
             
             // add new household to the database 
-            $sql = "INSERT INTO household(`household_number`, `zone`, `total_members`, `head_of_the_family`, `household_income`, `sanitary_toilet`,  `water_usage`, `house_ownership_status`,  `dwelling_type`, `land_ownership_status`) VALUES ('$household_number', '$zone', '$total_members', '$head_of_the_family', '$household_income', '$sanitary_toilet', '$water_usage', '$house_ownership_status', '$dwelling_type', '$land_ownership_status')";
+            $sql = "INSERT INTO household(`household_number`, `zone`, `total_members`, `head_of_the_family`, `household_income`, `sanitary_toilet`, `water_usage`, `house_ownership_status`, `land_ownership_status`) VALUES ('$household_number', '$zone', '$total_members', '$head_of_the_family', '$household_income', '$sanitary_toilet', '$water_usage', '$house_ownership_status', '$land_ownership_status')";
             $result = $connection->query($sql);
 
             if (!$result) {
@@ -54,7 +52,6 @@ $land_ownership_status = $_POST["land_ownership_status"];
                 $sanitary_toilet = "";
                 $water_usage = "";
                 $house_ownership_status = "";
-                $dwelling_type = "";
                 $land_ownership_status = "";
 
             $successMessage = "Household added correctly";
@@ -147,11 +144,7 @@ $land_ownership_status = $_POST["land_ownership_status"];
         ?>
         <form method="post">
             <div class="row mb-3">
-<<<<<<< HEAD
                 <label class="col-sm-3 col-form-label">Household Number</label>
-=======
-                <label class="col-sm-3 col-form-label">Household Number ni ATE GLAYSA and KUYA J!!</label>
->>>>>>> 9b4171e7ce7694423c839dcb59209da0d8a29fc4
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="household number" value="<?php echo $household_number; ?>">
                 </div>
@@ -172,7 +165,7 @@ $land_ownership_status = $_POST["land_ownership_status"];
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="total_members" value="<?php echo $total_members; ?>">
                 </div>
-            </div> 
+            </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Head of the Family</label>
                 <div class="col-sm-6">
@@ -186,31 +179,36 @@ $land_ownership_status = $_POST["land_ownership_status"];
                 </div>
             </div>
             <div class="col-sm-4">
-                <label class="col-sm-3 col-form-label">Sanitary Toilet</label>
-                <input type="text" class="form-control" name="sanitary_toilet" value="<?php echo $sanitary_toilet; ?>">
+                <label class="form-label">Sanitary Toilet</label>
+                <select class="form-select" name="sanitary_toilet">
+                <option value="Water-sealed">Water-sealed</option>
+                <option value="Antipolo">Antipolo</option>
+                <option value="None">None</option>
+                </select>
             </div>
             <div class="col-sm-4">
-                <label class="col-sm-3 col-form-label">Water Usage</label>
-                <input type="text" class="form-control" name="water_usage" value="<?php echo $water_usage; ?>">
+                <label class="form-label">Water Usage</label>
+                <select class="form-select" name="water_usage">
+                <option value="Faucet">Faucet</option>
+                <option value="Deep Well">Deep Well</option>
+                </select>
             </div>
             <div class="col-sm-4">
                 <label class="form-label">House Ownership Status</label>
                 <select class="form-select" name="house_ownership_status">
                 <option value="Owned">Owned</option>
+                <option value="Rent">Rent</option>
+                </select>
+            </div>
+            <div class="col-sm-4">
+                <label class="form-label">Land Ownership Status</label>
+                <select class="form-select" name="land_ownership_status">
+                <option value="Owned">Owned</option>
                 <option value="Landless">Landless</option>
                 <option value="Tenant">Tenant</option>
                 <option value="Care Taker">Care Taker</option>
-            </select>
+                </select>
             </div>
-            <div class="col-sm-4">
-                <label class="col-sm-3 col-form-label">Dwelling Type</label>
-                <input type="text" class="form-control" name="dwelling_type" value="<?php echo $dwelling_type; ?>">
-            </div>
-            <div class="col-sm-4">
-                <label class="col-sm-3 col-form-label">Land Ownership Status</label>
-                <input type="text" class="form-control" name="land_ownership_status" value="<?php echo $land_ownership_status; ?>">
-            </div>
-
 
 
             <?php
