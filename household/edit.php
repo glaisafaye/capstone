@@ -7,11 +7,16 @@ $database ="mis";
 // Create connection
 $connection = new mysqli($servername, $username, $password, $database);
 
-    $household_number = "";
-    $zone = "";
-    $total_members = "";
-    $head_of_the_family= "";
-    $household_income = "";
+$household_number = "";
+$zone = "";
+$total_members = "";
+$head_of_the_family = ""; 
+$household_income = "";
+$sanitary_toilet = "";
+$water_usage = "";
+$house_ownership_status = "";
+$land_ownership_status = "";
+
 
 $errorMessage = "";
 $successMessage = "";
@@ -34,27 +39,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         header("location: /mis/household/household.php");
         exit;
     }
-    $id = $row["id"];
-    $household_number = $row["household_number"];
-    $zone = $row["zone"];
-    $total_members = $row["total_members"];
-    $head_of_the_family = $row["head_of_the_family"];
-    $household_income = $row["household_income"];
+        $id = $row["id"];
+        $household_number = $row["household_number"];
+        $zone = $row["zone"];
+        $total_members = $row["total_members"];
+        $head_of_the_family = $row["head_of_the_family"];
+        $household_income = $row["household_income"];
+        $sanitary_toilet = $row["sanitary_toilet"];
+        $water_usage = $row["water_usage"];
+        $house_ownership_status = $row["house_ownership_status"];
+        $land_ownership_status = $row["land_ownership_status"];
 }
 // ...
 
 else {
-    $id = $_POST["id"];
-    $household_number = $_POST["household_number"];
-    $zone = $_POST["zone"];
-    $total_members = $_POST["total_members"];
-    $head_of_the_family = $_POST["head_of_the_family"];
-    $household_income = $_POST["household_income"];
+        $id = $_POST["id"];
+        $household_number = $_POST["household_number"];
+        $zone = $_POST["zone"];
+        $total_members = $_POST["total_members"];
+        $head_of_the_family = $_POST["head_of_the_family"];
+        $household_income = $_POST["household_income"];
+        $sanitary_toilet = $_POST["sanitary_toilet"];
+        $water_usage = $_POST["water_usage"];
+        $house_ownership_status = $_POST["house_ownership_status"];
+        $land_ownership_status = $_POST["land_ownership_status"];
 
-    if (empty($household_number) || empty($zone) || empty($total_members) || empty($head_of_the_family)) {
+    if (empty($household_number) || empty($zone) || empty($total_members) || empty($head_of_the_family) || empty($sanitary_toilet) || empty($water_usage) || empty($house_ownership_status) || empty($land_ownership_status)) {
         $errorMessage = "All fields are required";
     } else {
-        $sql = "UPDATE household SET `household_number`='$household_number', `zone`='$zone', `total_members`='$total_members', `head_of_the_family`='$head_of_the_family', `household_income`='$household_income' WHERE id=$id";
+        $sql = "UPDATE household SET `household_number`='$household_number', `zone`='$zone', `total_members`='$total_members', `head_of_the_family`='$head_of_the_family', `household_income`='$household_income', `sanitary_toilet`='$sanitary_toilet', `water_usage`='$water_usage', `house_ownership_status`='$house_ownership_status', `land_ownership_status`='$land_ownership_status'  WHERE id=$id";
         $result = $connection->query($sql);
 
         if (!$result) {
@@ -170,6 +183,7 @@ else {
                 <option value="Zone 5">Zone 5</option>
             </select>
         </div>
+        <a class="btn btn-primary" href="/mis/residents/add.php" role="button">Add Member</a>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Total Members</label>
                 <div class="col-sm-6">
@@ -187,6 +201,37 @@ else {
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="household_income" value="<?php echo $household_income; ?>">
                 </div>
+            </div>
+            <div class="col-sm-4">
+                <label class="form-label">Sanitary Toilet</label>
+                <select class="form-select" name="sanitary_toilet">
+                <option value="Water-sealed">Water-sealed</option>
+                <option value="Antipolo">Antipolo</option>
+                <option value="None">None</option>
+                </select>
+            </div>
+            <div class="col-sm-4">
+                <label class="form-label">Water Usage</label>
+                <select class="form-select" name="water_usage">
+                <option value="Faucet">Faucet</option>
+                <option value="Deep Well">Deep Well</option>
+                </select>
+            </div>
+            <div class="col-sm-4">
+                <label class="form-label">House Ownership Status</label>
+                <select class="form-select" name="house_ownership_status">
+                <option value="Owned">Owned</option>
+                <option value="Rent">Rent</option>
+                </select>
+            </div>
+            <div class="col-sm-4">
+                <label class="form-label">Land Ownership Status</label>
+                <select class="form-select" name="land_ownership_status">
+                <option value="Owned">Owned</option>
+                <option value="Landless">Landless</option>
+                <option value="Tenant">Tenant</option>
+                <option value="Care Taker">Care Taker</option>
+                </select>
             </div>
 
             <?php
