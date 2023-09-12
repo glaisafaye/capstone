@@ -194,7 +194,7 @@ $land_ownership_status = $_POST["land_ownership_status"];
                 <input type="text" class="form-control" name="water_usage" value="<?php echo $water_usage; ?>">
             </div>
             <div class="col-sm-4">
-                <label class="form-label">House ni Ownership Status</label>
+                <label class="form-label">House Ownership Status</label>
                 <select class="form-select" name="house_ownership_status">
                 <option value="Owned">Owned</option>
                 <option value="Landless">Landless</option>
