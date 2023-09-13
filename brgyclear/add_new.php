@@ -138,7 +138,7 @@ $connection = new mysqli($servername, $username, $password, $database);
         }
         ?>
         <form method="post">
-            <div class="row">
+        <div class="modal-dialog modal-xl">
                 <label for="clearanceNO">Clearance No:</label>
                 <input type="text" class="form-control" id="clearanceNO" name="clearanceNO" value="<?php echo $clearanceNo; ?>">
             </div>
