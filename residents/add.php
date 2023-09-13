@@ -188,7 +188,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <div class="row mb-3">
         <div class="col-md-4">
-            <label class="form-label">Last Name</label>
+            <label class="form-label">Last Namee</label>
             <input type="text" class="form-control" name="lname" value="<?php echo $lname; ?>">
         </div>
         <div class="col-md-4">
