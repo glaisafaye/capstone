@@ -7,8 +7,24 @@ $database = "mis";
 // Create connection
 $connection = new mysqli($servername, $username, $password, $database);
 
-$errorMessage = "";
-$successMessage = "";
+$fname = "";
+$lname = "";
+$mname = "";
+$phone = "";
+$gender = "";
+$birthday = "";
+$civil_status = "";
+$household_number = "";
+$differently_abled_person = "";
+$zone = "";
+$total_household_member = "";
+$relationship_to_head = "";
+$employment_status = "";
+$religion = "";
+$income = "";
+$educational_attainment = "";
+$remarks = "";
+$nationality = "";
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -21,11 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     $id = $_GET["id"];
 
-    $sql = "SELECT * FROM residents WHERE id=?";
-    $stmt = $connection->prepare($sql);
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $sql = "SELECT * FROM residents  WHERE id=$id";
+    $result = $connection->query($sql);
     $row = $result->fetch_assoc();
 
     
@@ -52,10 +65,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $educational_attainment = $row["educational_attainment"];
     $remarks = $row["remarks"];
     $nationality = $row["nationality"];
+}
+// ...
 
-
-} elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+ else {
+    $id = $_POST["id"];
     $fname = $_POST["fname"];
     $lname = $_POST["lname"];
     $mname = $_POST["mname"];
@@ -79,30 +93,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $errorMessage = "All fields are required";
     } else {
 
-        $sql = "UPDATE residents SET fname=?, lname=?, mname=?, phone=?, gender=?, birthday=?, civil_status=?, blood_type=?, differently_abled_person=?, zone=?, total_household_member=?, relationship_to_head=?, employment_status=?, religion=?, income=?, educational_attainment=? WHERE id=?";
-        $stmt = $connection->prepare($sql);
+        $sql = "UPDATE residents SET `fname` = '$fname', `lname` = '$lname', `mname` = '$mname', `phone` = '$phone', `gender` = '$gender', `birthday` = '$birthday', `civil_status` = '$civil_status', `household_number` = '$household_number', `differently_abled_person` = '$differently_abled_person', `zone` = '$zone', `total_household_member` = '$total_household_member', `relationship_to_head` = '$relationship_to_head', `employment_status` = '$employment_status', `religion` = '$religion', `income` =' $income', `educational_attainment` = '$educational_attainment', `remarks` = '$remarks', `nationality` = '$nationality' WHERE id = '$id'";
+        $result = $connection->query($sql);
 
-        if ($stmt) {
-
-            $stmt->bind_param(
-                "sssssssssssssssssss",
-                $fname, $lname, $mname, $phone, $gender, $birthday, $civil_status,
-                $differently_abled_person, $zone, $total_household_member, $relationship_to_head, $employment_status,
-                $religion, $income, $educational_attainment, $id
-            );
-
-            if ($stmt->execute()) {
-                $successMessage = "Resident updated correctly";
-                header("location: /mis/residents/residents.php");
-                exit;
-            } else {
-                $errorMessage = "Error updating resident: " . $stmt->error;
-            }
-
-            $stmt->close();
+        if (!$result) {
+            $errorMessage = "Invalid query" . $connection->error;
         } else {
-            $errorMessage = "Error preparing statement: " . $connection->error;
+
+            $successMessage = "Residents added correctly";
+
+            header("location: /mis/residents/residents.php");
+            exit;
         }
+
     }
 }
 ?>
@@ -179,7 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     </style>
 </head>
 <body>
-    <div class="container my-5"></div>
+    <div class="container my-5">
         
 
         <?php
@@ -301,7 +304,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             <label class="col-sm-3 col-form-label">Nationality</label>
                             <input type="text" class="form-control" name="nationality" value="<?php echo $nationality; ?>">
                        </div>
-        
+                       </div>
             <?php
                 if ( !empty($successMessage) ){
                 echo "
