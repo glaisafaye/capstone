@@ -4,8 +4,11 @@ $username = "root";
 $password = "";
 $database = "mis";
 
-// Create connection
 $connection = new mysqli($servername, $username, $password, $database);
+
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+}
 
 $fname = "";
 $lname = "";
@@ -26,6 +29,8 @@ $educational_attainment = "";
 $remarks = "";
 $nationality = "";
 
+$errorMessage = "";
+$successMessage = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // GET method: Show the data of the residents
@@ -37,15 +42,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     $id = $_GET["id"];
 
-    $sql = "SELECT * FROM residents  WHERE id=$id";
-    $result = $connection->query($sql);
-    $row = $result->fetch_assoc();
-
+    $sql = "SELECT * FROM residents WHERE id=?";
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
     
-    if (!$row) {
+    if ($result->num_rows === 0) {
         header("location: /mis/residents/residents.php");
         exit;
     }
+
+    $row = $result->fetch_assoc();
 
     $fname = $row["fname"];
     $lname = $row["lname"];
@@ -66,9 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $remarks = $row["remarks"];
     $nationality = $row["nationality"];
 }
-// ...
 
- else {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST["id"];
     $fname = $_POST["fname"];
     $lname = $_POST["lname"];
@@ -87,25 +94,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $income = $_POST["income"];
     $educational_attainment = $_POST["educational_attainment"];
     $remarks = $_POST["remarks"];
-    $nationality  = $_POST["nationality"];
+    $nationality = $_POST["nationality"];
 
     if (empty($fname) || empty($lname) || empty($phone) || empty($gender) || empty($zone)) {
         $errorMessage = "All fields are required";
     } else {
-
-        $sql = "UPDATE residents SET `fname` = '$fname', `lname` = '$lname', `mname` = '$mname', `phone` = '$phone', `gender` = '$gender', `birthday` = '$birthday', `civil_status` = '$civil_status', `household_number` = '$household_number', `differently_abled_person` = '$differently_abled_person', `zone` = '$zone', `total_household_member` = '$total_household_member', `relationship_to_head` = '$relationship_to_head', `employment_status` = '$employment_status', `religion` = '$religion', `income` =' $income', `educational_attainment` = '$educational_attainment', `remarks` = '$remarks', `nationality` = '$nationality' WHERE id = '$id'";
-        $result = $connection->query($sql);
-
-        if (!$result) {
-            $errorMessage = "Invalid query" . $connection->error;
-        } else {
-
-            $successMessage = "Residents added correctly";
-
+        $sql = "UPDATE residents SET `fname` = ?, `lname` = ?, `mname` = ?, `phone` = ?, `gender` = ?, `birthday` = ?, `civil_status` = ?, `household_number` = ?, `differently_abled_person` = ?, `zone` = ?, `total_household_member` = ?, `relationship_to_head` = ?, `employment_status` = ?, `religion` = ?, `income` = ?, `educational_attainment` = ?, `remarks` = ?, `nationality` = ? WHERE id = ?";
+        $stmt = $connection->prepare($sql);
+        $stmt->bind_param("ssssssssssssssssssi", $fname, $lname, $mname, $phone, $gender, $birthday, $civil_status, $household_number, $differently_abled_person, $zone, $total_household_member, $relationship_to_head, $employment_status, $religion, $income, $educational_attainment, $remarks, $nationality, $id);
+        
+        if ($stmt->execute()) {
+            $successMessage = "Resident updated correctly";
             header("location: /mis/residents/residents.php");
             exit;
+        } else {
+            $errorMessage = "Error updating resident: " . $stmt->error;
         }
-
     }
 }
 ?>
