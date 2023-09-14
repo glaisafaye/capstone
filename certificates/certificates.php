@@ -269,6 +269,7 @@
                         <th>Resident Name</th>
                         <th>Purpose</th>
                         <th>OR Number</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -302,10 +303,16 @@
                     <td>{$row['ddl_resident']}</td>
                     <td>{$row['purpose']}</td>
                     <td>{$row['orNo']}</td>
+                    <td>
+                    <a class='btn btn-primary btn-sm' href='/mis/brgyclear/barclear.php'>Generate</a> 
+                    </td>
                 </tr>
                 ";
+                 
                 }  
-               ?>                
+                
+               ?>     
+               
             </tbody> 
         </table>  
                
