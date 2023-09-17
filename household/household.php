@@ -19,7 +19,6 @@
             <table class="content-table">
                 <thead>
                     <tr>
-
                         <th>Household Number</th>
                         <th>Zone</th>
                         <th>Total Members</th>
