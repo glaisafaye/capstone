@@ -95,6 +95,103 @@
         display: flex;
         flex-direction: column;
     }
+    .user {
+            position: relative;
+            width: 50px;
+            height: 50px;
+        }
+
+        .user img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .main {
+            position: absolute;
+            top: 60px;
+            width: calc(100% - 260px);
+            left: 260px;
+            min-height: calc(100vh - 60px);
+            background: #f5f5f5;
+        }
+
+        .cards {
+            width: 100%;
+            padding: 35px 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 20px;
+        }
+
+        .cards .card {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+        }
+
+        .number {
+            font-size: 35px;
+            font-weight: 500;
+            color: #299b63;
+        }
+
+        .card-name {
+            color: #888;
+            font-weight: 600;
+        }
+
+        .icon-box i {
+            font-size: 45px;
+            color: #299b63;
+        }
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            margin-right: 10px;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
     </style>
 </head>
 
