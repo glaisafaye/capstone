@@ -173,6 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <td>{$row['orNo']}</td>
                     <td>
                     <a class='btn btn-primary btn-sm' href='/mis/certificates/brgyin.php'>Generate</a> 
+                    <a class='btn btn-danger btn-sm' href='/mis/certificates/delete.php?id={$row['id']}'>Delete</a>
                     </td>
                 </tr>
                 ";
