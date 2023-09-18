@@ -10,7 +10,6 @@ $connection = new mysqli($servername, $username, $password, $database);
     $position = "";
     $name = "";
     $contact_number = "";
-    $address = "";
     $start_term= "";
     $end_term = "";
 
@@ -40,7 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $position = $row["position"];
     $name = $row["name"];
     $contact_number = $row["contact_number"];
-    $address = $row["address"];
     $start_term = $row["start_term"]; 
     $end_term = $row["end_term"];
 
@@ -51,17 +49,16 @@ else {
         $position = $_POST["position"];
         $name = $_POST["name"];
         $contact_number = $_POST["contact_number"];
-        $address = $_POST["address"];
         $start_term = $_POST["start_term"];
         $end_term = $_POST["end_term"];
 
 
-        if (empty($position) || empty($name) || empty($contact_number) || empty($address) || empty($start_term) || empty($end_term)) {
+        if (empty($position) || empty($name) || empty($contact_number) || empty($start_term) || empty($end_term)) {
             $errorMessage = "All fields are required";
         } else {
     
             $sql = "UPDATE officials " . 
-            "SET position = '$position', name = '$name', `contact_number` = '$contact_number', address = '$address', `start_term` = '$start_term', `end_term` = '$end_term' " . 
+            "SET position = '$position', name = '$name', `contact_number` = '$contact_number', `start_term` = '$start_term', `end_term` = '$end_term' " . 
             "WHERE id = $id";
  
         
@@ -184,12 +181,6 @@ else {
                 <label class="col-sm-3 col-form-label">Contact Number</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="contact number" value="<?php echo $contact_number; ?>">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Address</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="address" value="<?php echo $address; ?>">
                 </div>
             </div>
             <div class="form-group">

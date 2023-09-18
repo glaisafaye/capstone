@@ -18,11 +18,9 @@
             <table class="content-table">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Position</th>
                         <th>Name</th>
                         <th>Contact Number</th>
-                        <th>Address</th>
                         <th>Start Term</th>
                         <th>End Term</th>
                         <th>Action</th>
@@ -54,11 +52,9 @@
                 // Read data from each row
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
-                    echo "<td>{$row['id']}</td>";
                     echo "<td>{$row['position']}</td>";
                     echo "<td>{$row['name']}</td>";
                     echo "<td>{$row['contact_number']}</td>";
-                    echo "<td>{$row['address']}</td>";
                     echo "<td>{$row['start_term']}</td>";
                     echo "<td>{$row['end_term']}</td>";
                     echo "<td>";

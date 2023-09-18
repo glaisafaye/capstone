@@ -11,7 +11,6 @@ $connection = new mysqli($servername, $username, $password, $database);
     $position = "";
     $name = "";
     $contact_number = "";
-    $address = "";
     $start_term= "";
     $end_term = "";
 
@@ -23,20 +22,19 @@ $connection = new mysqli($servername, $username, $password, $database);
         $position = $_POST["position"];
         $name = $_POST["name"];
         $contact_number = $_POST["contact_number"];
-        $address = $_POST["address"];
         $start_term = $_POST["start_term"];
         $end_term = $_POST["end_term"];
 
 
     }
-    if (empty($name) || empty($contact_number) || empty($address)) {
+    if (empty($name) || empty($contact_number) || empty($start_term) || empty($end_term)) {
         $errorMessage = "All fields are required";
     } else {
         // ...
         
             
             // add new official to the database 
-            $sql = "INSERT INTO officials (`position`, `name`, `contact_number`, `address`, `start_term`, `end_term` ) VALUES ('$position', '$name', '$contact_number', '$address', '$start_term', '$end_term')";
+            $sql = "INSERT INTO officials (`position`, `name`, `contact_number`, `start_term`, `end_term` ) VALUES ('$position', '$name', '$contact_number', '$start_term', '$end_term')";
             $result = $connection->query($sql);
 
             if (!$result) {
@@ -45,7 +43,6 @@ $connection = new mysqli($servername, $username, $password, $database);
                 $position = "";
                 $name = "";
                 $contact_number = "";
-                $address = "";
                 $start_term = "";
                 $end_term = "";
           
@@ -160,12 +157,6 @@ $connection = new mysqli($servername, $username, $password, $database);
                 <label class="col-sm-3 col-form-label">Contact Number</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="contact_number" value="<?php echo $contact_number; ?>">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Address</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="address" value="<?php echo $address; ?>">
                 </div>
             </div>
             <div class="form-group">

@@ -114,6 +114,8 @@
         left: 260px;
         min-height: calc(100vh - 60px);
         background: #f5f5f5;
+        position: relative; /* Set position to relative */
+        z-index: 1;
     }
 
     .cards {

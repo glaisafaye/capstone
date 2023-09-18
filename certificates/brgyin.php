@@ -1,3 +1,7 @@
+<?php
+// Check if $residentName is defined and not empty
+if (isset($residentName) && !empty($residentName)) {
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -309,7 +313,7 @@
                     <img class="logo-right" src="logo2.PNG" alt="Right Logo"></img>
                 </div>
                 <div class="or">
-                    <h2>C. NO. 07-2023-234</h2><br>
+                    <h2>C. NO. <strong class="clearanceNO"><?php echo $clearanceNO; ?></strong></h2><br>
                 </div>
                 <div class="certificate">
                     <h2>CERTIFICATION</h2><br>
@@ -318,10 +322,10 @@
                     <h2>TO WHOM IT MAY CONCERN:</h2>
                 </div>
                 <div class="first">
-                    <p>This is to certify that <strong class="name">[Your Name]</strong> has successfully cleared all the necessary requirements and is hereby granted clearance.</p>
+                    <p>This is to certify that <strong class="name" style="font-size: 18pt; color: red;"><?php echo $residentName; ?></strong> has successfully cleared all the necessary requirements and is hereby granted clearance.</p>
                     <p>This certifies further that they belong to an indigent family of the Barangay with an income below poverty level.</p>
-                    <p>This certification is being issued in support to his/her request for <strong class="name">[Purpose]</strong>.</p>
-                    <p>Issued this <strong class="date"> [Date] </strong> at Puntian, Sumilao, Bukidnon.<br><br><br><br><br><br><br><br>
+                    <p>This certification is being issued in support to his/her request for <strong class="purpose" style="font-size: 18pt; color: red;"><?php echo $purpose; ?></strong>.</p>
+                    <p>Issued this <strong class="date" style="font-size: 18pt; color: red;"><?php echo date("F j, Y"); ?></strong> at Puntian, Sumilao, Bukidnon.<br><br><br><br><br><br><br><br>
                 </div>
                 <div class="signature">
                     HON. TIRSO B. AMISTOSO<br>
@@ -336,3 +340,9 @@
     
 </body>
 </html>
+<?php
+} else {
+    // Handle the case where $residentName is not defined
+    echo "Resident Name is not available.";
+}
+?>
