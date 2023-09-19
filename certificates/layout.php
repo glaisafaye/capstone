@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Puntian Management Information System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
     * {
@@ -14,47 +15,7 @@
         box-sizing: border-box;
         font-family: 'poppins', sans-serif;
     }
-    .topbar {
-        position: fixed;
-        background: #fff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-        width: 100%;
-        height: 60px;
-        padding: 0 20px;
-        display: grid;
-        grid-template-columns: 2fr 10fr 0.4fr 1fr;
-        align-items: center;
-        z-index: 1;
-    }
-
-        .logo h2 {
-            color: #299b63;
-        }
-
-        .search {
-            position: relative;
-            width: 60%;
-            justify-self: center;
-        }
-
-        .search input {
-            width: 100%;
-            height: 40px;
-            padding: 0 40px;
-            font-size: 16px;
-            outline: none;
-            border: none;
-            border-radius: 10px;
-            background: #f5f5f5;
-        }
-
-        .search i {
-            position: absolute;
-            right: 15px;
-            top: 15px;
-            cursor: pointer;
-        }
-
+    
     .sidebar {
         position: fixed;
         top: 60px;
@@ -114,7 +75,7 @@
         left: 260px;
         min-height: calc(100vh - 60px);
         background: #f5f5f5;
-        position: relative; /* Set position to relative */
+        position: relative;
         z-index: 1;
     }
 
@@ -233,7 +194,6 @@
     max-width: 400px;
 }
 
-/* Style for the close button */
 .close-button {
     position: absolute;
     top: 10px;
@@ -243,7 +203,6 @@
     color: #888;
 }
 
-/* Style for the form elements */
 .form-control {
     margin: 10px 0;
     padding: 10px;
@@ -252,7 +211,6 @@
     border-radius: 5px;
 }
 
-/* Style for buttons */
 .btn {
     padding: 10px 20px;
     border: none;
@@ -270,12 +228,10 @@
     color: #fff;
 }
 
-/* Style for the main content */
 .main {
     padding: 20px;
 }
 
-/* Style for the table */
 .content-table {
     width: 100%;
     border-collapse: collapse;
@@ -291,50 +247,86 @@
 .content-table th {
     background-color: #f2f2f2;
 }
+
+.navbar {
+    background-color: #299b63; 
+    font-family: 'poppins', sans-serif; 
+    font-size: 18px; 
+    border-radius: 0; 
+}
+
+.navbar-brand {
+    color: #fff; 
+    font-weight: bold; 
+    font-size: 24px; 
+}
+
+.form-control {
+    border-radius: 5px;
+    font-family: 'poppins', sans-serif;
+    font-size: 16px; 
+}
+
+.btn-outline-success {
+    background-color: #299b63; 
+    color: #fff; 
+    border-color: #299b63; 
+}
+
+.btn-outline-success:hover {
+    background-color: #247b4d; 
+}
+
+.user {
+        position: relative;
+        width: 50px;
+        height: 50px;
+    }
+
+    .user img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
 </style>
-
 </head>
-
 <body>
-    
-    <div class="container">
-        <div class="topbar">
-            <div class="logo">
-                <h2>Puntian, Sumilao</h2>
-            </div>
-            <div class="search">
-                <input type="text" id="search" placeholder="search here">
-                <label for="search"> <i class="fas fa-search"></i></label>
-            </div>
-            <i class="fas fa-bell"></i>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand">Puntian, Sumilao</a>  
             <div class="user">
                 <img src="/mis/dashboard/logo.jpg" alt="">
             </div>
         </div>
-        <div class="sidebar">
-            <ul>
-                <?php
-                $menuItems = array(
-                    array("Dashboard", "fas fa-th-large", "/mis/dashboard/dashboard.php"),
-                    array("Officials", "fas fa-user-tie", "/mis/officials/officials.php"),
-                    array("Household Profiling","fas fa-house-user", "/mis/household/household.php"),
-                    array("Resident Profiling", "fas fa-users", "/mis/residents/residents.php"),
-                    array("Certification", "fas fa-print", "/mis/certificates/certificates.php"),
-                    array("Decision Support System", "fas fa-chart-bar", "/mis/dss/dss.php"),
-                );
+    </nav>
+    
+    <div class="sidebar">
+    <ul>
+        <?php
+  
+        $menuItems = array(
+            array("Dashboard", "fas fa-th-large", "/mis/dashboard/dashboard.php"),
+            array("Officials", "fas fa-user-tie", "/mis/officials/officials.php"),
+            array("Household Profiling", "fas fa-house-user", "/mis/household/household.php"),
+            array("Resident Profiling", "fas fa-users", "/mis/residents/residents.php"),
+            array("Certification", "fas fa-print", "/mis/certificates/certificates.php"),
+            array("Decision Support System", "fas fa-chart-bar", "/mis/dss/dss.php"),
+        );
 
-                foreach ($menuItems as $item) {
-                    echo '<li>';
-                    echo '<a href="' . $item[2] . '">'; 
-                    echo '<i class="' . $item[1] . '"></i>';
-                    echo '<div>' . $item[0] . '</div>';
-                    echo '</a>';
-                    echo '</li>';
-                }
-                ?>
-            </ul>
-        </div>
-    </div>
-</body>
 
-</html>
+        foreach ($menuItems as $item) {
+            echo '<li>';
+            echo '<a href="' . $item[2] . '">';
+            echo '<i class="' . $item[1] . '"></i>';
+            echo '<div>' . $item[0] . '</div>';
+            echo '</a>';
+            echo '</li>';
+        }
+        ?>
+    </ul>
+</div>
+    </body>
+    </html>
