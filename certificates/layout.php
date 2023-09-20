@@ -70,42 +70,14 @@
 
     .main {
         position: absolute;
-        top: 60px;
-        width: calc(100% - 260px);
-        left: 260px;
+        top: 40px;
+        width: calc(90% - 200px);
+        left: 315px;
         min-height: calc(100vh - 60px);
         background: #f5f5f5;
         position: relative;
         z-index: 1;
-    }
-
-    .cards {
-        width: 100%;
-        padding: 35px 20px;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-gap: 20px;
-    }
-
-    .cards .card {
         padding: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: #fff;
-        border-radius: 10px;
-        box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
-    }
-
-    .number {
-        font-size: 35px;
-        font-weight: 500;
-        color: #299b63;
-    }
-
-    .card-name {
-        color: #888;
-        font-weight: 600;
     }
 
     .icon-box i {
@@ -117,61 +89,118 @@
     padding: 20px;
     }
 
-.btn-primary {
-    background-color: #299b63;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
+.navbar {
+    background-color: #299b63; 
+    font-family: 'poppins', sans-serif; 
+    font-size: 18px; 
+    border-radius: 0; 
+}
+
+.navbar-brand {
+    color: #fff; 
+    font-weight: bold; 
+    font-size: 24px; 
+}
+
+.form-control {
     border-radius: 5px;
-    text-decoration: none;
-    font-size: 16px;
-    cursor: pointer;
+    font-family: 'poppins', sans-serif;
+    font-size: 16px; 
 }
 
-.btn-primary:hover {
-    background-color: #247b4d;
+.btn-outline-success:hover {
+    background-color: #247b4d; 
 }
 
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-}
-
-.table th, .table td {
-    padding: 10px 15px;
-    text-align: left;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.table th {
-    background-color: #f5f5f5;
-}
-
-.table tbody tr:hover {
-    background-color: #f5f5f5;
-}
-
-    .content-table{
-        border-collapse: collapse;
-        margin: 25px 0;
-        font-size: 16px;
-        min-width: 400px;
+.user {
+        position: relative;
+        width: 50px;
+        height: 50px;
     }
 
-.content-table thead tr {
-    background-color: #eeeee4;
-    color: #24ad50;
-    text-align: left;
+form {
+    max-width: 500px;
+    margin: 0 auto;
 }
 
-.content-table th,
-.content-table td{
-    padding: 12px 15px;
-}
-#pop-up-modal {
+    table.content-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    table.content-table th,
+    table.content-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+
+    table.content-table th {
+        background-color: #f2f2f2;
+    }
+
+    table.content-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .pagination a {
+        padding: 8px 16px;
+        text-decoration: none;
+        background-color: #f2f2f2;
+        color: #333;
+        border: 1px solid #ddd;
+        margin: 0 4px;
+    }
+
+    .pagination a:hover {
+        background-color: #333;
+        color: #fff;
+    }
+
+    .current-page {
+        background-color: #333;
+        color: #fff;
+        padding: 8px 16px;
+        border: 1px solid #333;
+        margin: 0 4px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-outline-primary {
+        background-color: transparent;
+        border: 1px solid #007bff;
+        color: #007bff;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #007bff;
+        color: #fff;
+    }
+ 
+    #pop-up-modal {
     display: none;
     position: fixed;
     top: 0;
@@ -203,94 +232,6 @@
     color: #888;
 }
 
-.form-control {
-    margin: 10px 0;
-    padding: 10px;
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.btn-primary {
-    background-color: #007bff;
-    color: #fff;
-}
-
-.btn-secondary {
-    background-color: #ccc;
-    color: #fff;
-}
-
-.main {
-    padding: 20px;
-}
-
-.content-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.content-table th, .content-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-}
-
-.content-table th {
-    background-color: #f2f2f2;
-}
-
-.navbar {
-    background-color: #299b63; 
-    font-family: 'poppins', sans-serif; 
-    font-size: 18px; 
-    border-radius: 0; 
-}
-
-.navbar-brand {
-    color: #fff; 
-    font-weight: bold; 
-    font-size: 24px; 
-}
-
-.form-control {
-    border-radius: 5px;
-    font-family: 'poppins', sans-serif;
-    font-size: 16px; 
-}
-
-.btn-outline-success {
-    background-color: #299b63; 
-    color: #fff; 
-    border-color: #299b63; 
-}
-
-.btn-outline-success:hover {
-    background-color: #247b4d; 
-}
-
-.user {
-        position: relative;
-        width: 50px;
-        height: 50px;
-    }
-
-    .user img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-    }
 </style>
 </head>
 <body>

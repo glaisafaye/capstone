@@ -70,42 +70,14 @@
 
     .main {
         position: absolute;
-        top: 60px;
-        width: calc(100% - 260px);
-        left: 260px;
+        top: 40px;
+        width: calc(90% - 200px);
+        left: 315px;
         min-height: calc(100vh - 60px);
         background: #f5f5f5;
         position: relative;
         z-index: 1;
-    }
-
-    .cards {
-        width: 100%;
-        padding: 35px 20px;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-gap: 20px;
-    }
-
-    .cards .card {
         padding: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: #fff;
-        border-radius: 10px;
-        box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
-    }
-
-    .number {
-        font-size: 35px;
-        font-weight: 500;
-        color: #299b63;
-    }
-
-    .card-name {
-        color: #888;
-        font-weight: 600;
     }
 
     .icon-box i {
@@ -114,60 +86,121 @@
     }
 
     .content {
-        padding: 20px;
+    padding: 20px;
     }
 
-    .btn-primary {
-        background-color: #299b63;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        text-decoration: none;
-        font-size: 16px;
-        cursor: pointer;
+.navbar {
+    background-color: #299b63; 
+    font-family: 'poppins', sans-serif; 
+    font-size: 18px; 
+    border-radius: 0; 
+}
+
+.navbar-brand {
+    color: #fff; 
+    font-weight: bold; 
+    font-size: 24px; 
+}
+
+.form-control {
+    border-radius: 5px;
+    font-family: 'poppins', sans-serif;
+    font-size: 16px; 
+}
+
+.btn-outline-success:hover {
+    background-color: #247b4d; 
+}
+
+.user {
+        position: relative;
+        width: 50px;
+        height: 50px;
     }
 
-    .btn-primary:hover {
-        background-color: #247b4d;
-    }
+form {
+    max-width: 500px;
+    margin: 0 auto;
+}
 
-    .table {
+    table.content-table {
         width: 100%;
         border-collapse: collapse;
         margin-top: 20px;
-        background-color: #fff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
     }
 
-    .table th, .table td {
-        padding: 10px 15px;
-        text-align: left;
-        border-bottom: 1px solid #e0e0e0;
+    table.content-table th,
+    table.content-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
     }
 
-    .table th {
-        background-color: #f5f5f5;
+    table.content-table th {
+        background-color: #f2f2f2;
     }
 
-    .table tbody tr:hover {
-        background-color: #f5f5f5;
+    table.content-table tr:nth-child(even) {
+        background-color: #f2f2f2;
     }
 
-    .content-table{
-        border-collapse: collapse;
-        margin: 25px 0;
-        font-size: 16px;
-        min-width: 400px;
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
     }
 
-    .content-table thead tr {
-        background-color: #eeeee4;
-        color: #24ad50;
-        text-align: left;
+    .pagination a {
+        padding: 8px 16px;
+        text-decoration: none;
+        background-color: #f2f2f2;
+        color: #333;
+        border: 1px solid #ddd;
+        margin: 0 4px;
     }
 
-    .modal-content {
+    .pagination a:hover {
+        background-color: #333;
+        color: #fff;
+    }
+
+    .current-page {
+        background-color: #333;
+        color: #fff;
+        padding: 8px 16px;
+        border: 1px solid #333;
+        margin: 0 4px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-outline-primary {
+        background-color: transparent;
+        border: 1px solid #007bff;
+        color: #007bff;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #007bff;
+        color: #fff;
+    }
+ 
+    .modal-scrollable-content {
         background-color: #fff;
         border-radius: 10px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
@@ -176,191 +209,11 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        max-width: 400px;
-    }
-
-    .close-button {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 24px;
-        cursor: pointer;
-        color: #888;
-    }
-
-    .form-control {
-        margin: 10px 0;
-        padding: 10px;
-        width: 100%;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-
-    .btn {
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .btn-primary {
-        background-color: #007bff;
-        color: #fff;
-    }
-
-    .btn-secondary {
-        background-color: #ccc;
-        color: #fff;
-    }   
-
-    .main {
-        padding: 20px;
-    }
-
-    .content-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-
-    .content-table th, .content-table td {
-        border: 1px solid #ddd;
-        padding: 10px;
-        text-align: left;
-    }
-
-    .content-table th {
-        background-color: #f2f2f2;
-    }
-
-    .navbar {
-        background-color: #299b63; 
-        font-family: 'poppins', sans-serif; 
-        font-size: 18px; 
-        border-radius: 0; 
-    }
-
-    .navbar-brand {
-        color: #fff; 
-        font-weight: bold; 
-        font-size: 24px; 
-    }
-
-    .form-control {
-        border-radius: 5px;
-        font-family: 'poppins', sans-serif;
-        font-size: 16px; 
-    }
-
-    .btn-outline-success {
-        background-color: #299b63; 
-        color: #fff; 
-        border-color: #299b63; 
-    }
-
-    .btn-outline-success:hover {
-        background-color: #247b4d; 
-    }
-
-    .user {
-        position: relative;
-        width: 50px;
-        height: 50px;
-    }
-
-    .user img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-    }
-
-    form {
-        max-width: 400px;
-        margin: 0 auto;
-    }
-
-    .form-label {
-        font-weight: bold;
-    }
-
-    .form-control {
-        margin-bottom: 15px;
-    }
-
-    .pagination {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 20px;
-    }
-
-    .btn-primary {
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-    }
-
-    .btn-primary:hover {
-        background-color: #0056b3;
-        color: #fff;
-    }
-
-    .current-page {
-        background-color: #007bff;
-        color: #fff;
-        border: 1px solid #007bff;
-        padding: 5px 10px;
-        margin: 0 5px;
-    }
-
-    .modal-content {
-     padding: 20px; 
-    }
-
-    label {
-        font-weight: bold; 
-    }
-
-    input[type="text"],
-    select {
-        width: 100%;
-        padding: 10px; 
-        margin-bottom: 15px; 
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-
-    .btn-primary {
-        background-color: #007bff; 
-        color: #fff; 
-        padding: 10px 20px;
-        border: none; 
-        border-radius: 4px; 
-        cursor: pointer;
-    }
-
-    .btn-outline-primary {
-        color: #007bff; 
-        border: 1px solid #007bff; 
-        padding: 10px 20px; 
-        border-radius: 4px;
-        cursor: pointer; 
-    }
-
-    .btn {
-        margin-right: 10px;
-    }
-
-    .modal-scrollable-content {
-        max-height: 70vh;
-        overflow-y: auto;
+        max-width: 300px;
     }
 
     .modal-dialog.modal-dialog-centered {
-        max-width: 80%;
+        max-width: 30%;
     }
 
     .modal-body {
@@ -372,6 +225,8 @@
         font-size: 1.5rem; 
         margin-bottom: 20px; 
     }
+</style>
+
 </style>
 </head>
 <body>

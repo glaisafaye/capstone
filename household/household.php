@@ -193,8 +193,7 @@ $connection = new mysqli($servername, $username, $password, $database);
                                 <th>Zone</th>
                                 <th>Total Members</th>
                                 <th>Head of the Family</th>
-                                <th>Action</th>  
-             
+                                <th>Action</th>               
                             </tr>
                             </thead>
                         <tbody>
@@ -231,18 +230,19 @@ $connection = new mysqli($servername, $username, $password, $database);
                 if ($result) {
                     while ($row = $result->fetch_assoc()) {
 
-                echo "
-                <tr>
-                    <td>{$row['household_number']}</td>
-                    <td>{$row['zone']}</td>
-                    <td>{$row['total_members']}</td>
-                    <td>{$row['head_of_the_family']}</td>
-                    <td>
-                    <a class='btn btn-primary btn-sm' href='/mis/household/edit.php?id={$row['id']}'>Edit</a>                        
-                    <a class='btn btn-danger btn-sm' href='/mis/household/delete.php?id={$row['id']}'>Delete</a>
-                    </td>
-                </tr>
-                ";
+                        echo "
+                        <tr>
+                            <td>{$row['household_number']}</td>
+                            <td>{$row['zone']}</td>
+                            <td>{$row['total_members']}</td>
+                            <td>{$row['head_of_the_family']}</td>
+                            <td>
+                            <a class='btn btn-primary btn-sm edit-button' data-household-number='{$row['household_number']}' data-zone='{$row['zone']}' data-total-members='{$row['total_members']}' data-head-of-family='{$row['head_of_the_family']}' data-household-income='{$row['household_income']}' data-sanitary-toilet='{$row['sanitary_toilet']}' data-water-usage='{$row['water_usage']}' data-house-ownership-status='{$row['house_ownership_status']}' data-land-ownership-status='{$row['land_ownership_status']}' href='#'>Edit</a>
+                            <a class='btn btn-danger btn-sm' href='/mis/household/delete.php?id={$row['id']}'>Delete</a>
+                            </td>
+                        </tr>
+                        ";
+                        
                 }  
             }
                ?>                
@@ -278,12 +278,46 @@ $connection = new mysqli($servername, $username, $password, $database);
             firstModal.style.display = "block"; 
         });
 
-       
         document.getElementById("close-modal").addEventListener("click", function () {
             var firstModal = document.getElementById("pop-up-modal");
             firstModal.style.display = "none"; 
         });
-        </script>
 
+        document.querySelectorAll(".edit-button").forEach(function (editButton) {
+            editButton.addEventListener("click", function (event) {
+            event.preventDefault(); 
+
+            var householdNumber = editButton.getAttribute("data-household-number");
+            var zone = editButton.getAttribute("data-zone");
+            var totalMembers = editButton.getAttribute("data-total-members");
+            var headOfFamily = editButton.getAttribute("data-head-of-family");
+            var householdIncome = editButton.getAttribute("data-household-income");
+            var sanitaryToilet = editButton.getAttribute("data-sanitary-toilet");
+            var waterUsage = editButton.getAttribute("data-water-usage");
+            var houseOwnershipStatus = editButton.getAttribute("data-house-ownership-status");
+            var landOwnershipStatus = editButton.getAttribute("data-land-ownership-status");
+
+
+            document.querySelector("[name='household_number']").value = householdNumber;
+            document.querySelector("[name='zone']").value = zone;
+            document.querySelector("[name='total_members']").value = totalMembers;
+            document.querySelector("[name='head_of_the_family']").value = headOfFamily;
+            document.querySelector("[name='household_income']").value = householdIncome;
+            document.querySelector("[name='sanitary_toilet']").value = sanitaryToilet;
+            document.querySelector("[name='water_usage']").value = waterUsage;
+            document.querySelector("[name='house_ownership_status']").value = houseOwnershipStatus;
+            document.querySelector("[name='land_ownership_status']").value = landOwnershipStatus;
+
+            var editModal = document.getElementById("pop-up-modal");
+            editModal.style.display = "block";
+        });
+    });
+
+    document.getElementById("close-modal").addEventListener("click", function () {
+    var firstModal = document.getElementById("pop-up-modal");
+    firstModal.style.display = "none";
+});
+
+        </script>
     </body>
 </html>
