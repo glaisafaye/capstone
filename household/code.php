@@ -1,8 +1,9 @@
 <?php
 session_start();
 $connection = mysqli_connect("localhost", "root", "", "mis");
+/* insert data */
+if (isset($_POST['save_data'])) {
 
-if (isset($_POST['submit'])) {
   $id = $_POST["id"];
   $houseNum = $_POST["houseNum"];
   $zone = $_POST["zone"];
@@ -26,6 +27,7 @@ if (isset($_POST['submit'])) {
   }
 }
 
+/* view data */
 if (isset($_POST['click_view_btn'])) {
   $id = $_POST['user_id'];
 
@@ -53,6 +55,73 @@ if (isset($_POST['click_view_btn'])) {
   else 
   {
     echo '<h4>No record found</h4>';
+  }
+}
+
+/*edit data */
+if (isset($_POST['click_edit_btn'])) {
+  $id = $_POST['user_id'];
+  $arrayresult = [];
+
+  /* echo $id; */
+  $fetch_query = "SELECT * FROM household WHERE id='$id'";
+  $fetch_query_run = mysqli_query($connection, $fetch_query);
+
+  if (mysqli_num_rows($fetch_query_run) > 0) {
+    while ($row = mysqli_fetch_array($fetch_query_run)) {
+
+     array_push($arrayresult, $row);
+     header('content-type: application/json');
+     echo json_encode($arrayresult);
+    }
+  } 
+  else 
+  {
+    echo '<h4>No record found</h4>';
+  }
+}
+
+/* update data */
+if (isset($_POST['update_data'])) {
+  $id = $_POST['id'];
+  $houseNum = $_POST['houseNum'];
+  $zone = $_POST['zone'];
+  $totalMem = $_POST['totalMem'];
+  $famHead = $_POST['famHead'];
+  $income = $_POST['income'];
+  $sanToilet = $_POST['sanToilet'];
+  $water = $_POST['water'];
+  $ownerStatus = $_POST['ownerStatus'];
+  $landStatus = $_POST['landStatus'];
+
+  $update_query = "UPDATE household SET houseNum='$houseNum', zone='$zone', totalMem='$totalMem', famHead='$famHead', income='$income', sanToilet='$sanToilet', water='$water', ownerStatus='$ownerStatus', landStatus='$landStatus' WHERE id ='id'";
+  $update_query_run = mysqli_query($connection, $update_query);
+
+  if($update_query_run)
+  {
+    $_SESSION['status'] = "Data updated successfully";
+    header('location: household.php');
+  }
+  else{
+    $_SESSION['status'] = "Data not updated successfully";
+    header('location: household.php');
+  }
+}
+
+/* delete data */
+if (isset($_POST['click_delete_btn'])) {
+  $id = $_POST['id'];
+
+  $delete_query = "DELETE FROM household WHERE id = '$id'";
+  $delete_query_run = mysqli_query($connection, $delete_query);
+
+  if ($delete_query_run)
+  {
+    echo "Data deleted successfully";
+  }
+  else 
+  {
+    echo "Data deletion failed";
   }
 }
 
