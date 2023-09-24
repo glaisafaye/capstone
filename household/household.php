@@ -1,323 +1,246 @@
 <?php
+session_start();
 
-$servername ="localhost";
-$username ="root";
-$password ="";
-$database ="mis";
+include('includes/topbar.php'); ?>
 
-$connection = new mysqli($servername, $username, $password, $database);
-
-    $household_number = "";
-    $zone = "";
-    $total_members = "";
-    $head_of_the_family = ""; 
-    $household_income = "";
-    $sanitary_toilet = "";
-    $water_usage = "";
-    $house_ownership_status = "";
-    $land_ownership_status = "";
-
-    $errorMessage = "";
-    $successMessage = "";
-
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $household_number = $_POST["household_number"];
-        $zone = $_POST["zone"];
-        $total_members = $_POST["total_members"];
-        $head_of_the_family = $_POST["head_of_the_family"];
-        $household_income = $_POST["household_income"];
-        $sanitary_toilet = $_POST["sanitary_toilet"];
-        $water_usage = $_POST["water_usage"];
-        $house_ownership_status = $_POST["house_ownership_status"];
-        $land_ownership_status = $_POST["land_ownership_status"];
-
-    }
-        if (empty($household_number) || empty($zone) || empty($total_members) || empty($head_of_the_family) || empty($sanitary_toilet) || empty($water_usage) || empty($house_ownership_status) || empty($land_ownership_status)) {
-            $errorMessage = "All fields are required";
-        } else {
-            
-            $sql = "INSERT INTO household(`household_number`, `zone`, `total_members`, `head_of_the_family`, `household_income`, `sanitary_toilet`, `water_usage`, `house_ownership_status`, `land_ownership_status`) VALUES ('$household_number', '$zone', '$total_members', '$head_of_the_family', '$household_income', '$sanitary_toilet', '$water_usage', '$house_ownership_status', '$land_ownership_status')";
-            $result = $connection->query($sql);
-
-            if (!$result) {
-                $errorMessage = "Invalid query" . $connection->error;
-            } else {
-                $household_number = "";
-                $zone = "";
-                $total_members = "";
-                $head_of_the_family = ""; 
-                $household_income = "";
-                $sanitary_toilet = "";
-                $water_usage = "";
-                $house_ownership_status = "";
-                $land_ownership_status = "";
-
-            $successMessage = "Household added correctly";
-
-            header("location: /mis/household/household.php");
-            exit;
-        }
-        
-    } 
-?> 
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-</head>
-
-<body>
-    <?php include 'layout.php'; ?>
-
-<div id="pop-up-modal" class="modal">
+<!-- insert modal -->
+<div class="modal fade" id="insertdata" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewusermodalLabel" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
-        <h3>Enter Household Information</h3>
-        <form method="post">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="mb-3">
-                        <label class="form-label">Household Number</label>
-                        <input type="text" class="form-control" name="household_number" value="<?php echo $household_number; ?>">
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="mb-3">
-                        <label class="form-label">Zone</label>
-                        <select class="form-select" name="zone">
-                            <option value="Zone 1">Zone 1</option>
-                            <option value="Zone 2">Zone 2</option>
-                            <option value="Zone 3">Zone 3</option>
-                            <option value="Zone 4">Zone 4</option>
-                            <option value="Zone 5">Zone 5</option>
-                        </select>
-                    </div>
-                </div>
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="insertdataLabel">Enter Household Information</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="code.php" method="POST">
+        <div class="modal-body">
+
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label">Household Number</label>
+                <input type="number" class="form-control" name="houseNum" placeholder="enter household number">
+              </div>
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="mb-3">
-                        <label class="form-label">Total Members</label>
-                        <input type="text" class="form-control" name="total_members" value="<?php echo $total_members; ?>">
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="mb-3">
-                        <label class="form-label">Head of the Family</label>
-                        <input type="text" class="form-control" name="head_of_the_family" value="<?php echo $head_of_the_family; ?>">
-                    </div>
-                </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label">Zone</label>
+                <select class="form-select" name="zone" placeholder="enter zone">
+                  <option value="Zone 1">Zone 1</option>
+                  <option value="Zone 2">Zone 2</option>
+                  <option value="Zone 3">Zone 3</option>
+                  <option value="Zone 4">Zone 4</option>
+                  <option value="Zone 5">Zone 5</option>
+                </select>
+              </div>
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="mb-3">
-                        <label class="form-label">Household Income</label>
-                        <input type="text" class="form-control" name="household_income" value="<?php echo $household_income; ?>">
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="mb-3">
-                        <label class="form-label">Sanitary Toilet</label>
-                        <select class="form-select" name="sanitary_toilet">
-                            <option value="Water-sealed">Water-sealed</option>
-                            <option value="Antipolo">Antipolo</option>
-                            <option value="None">None</option>
-                        </select>
-                    </div>
-                </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label">Total Members</label>
+                <input type="number" class="form-control" name="totalMem" placeholder="enter total members">
+              </div>
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="mb-3">
-                        <label class="form-label">Water Usage</label>
-                        <select class="form-select" name="water_usage">
-                            <option value="Faucet">Faucet</option>
-                            <option value="Deep Well">Deep Well</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="mb-3">
-                        <label class="form-label">House Ownership Status</label>
-                        <select class="form-select" name="house_ownership_status">
-                            <option value="Owned">Owned</option>
-                            <option value="Rent">Rent</option>
-                        </select>
-                    </div>
-                </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label">Head of the Family</label>
+                <input type="text" class="form-control" name="famHead" placeholder="enter head of the family">
+              </div>
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="mb-3">
-                        <label class="form-label">Land Ownership Status</label>
-                        <select class="form-select" name="land_ownership_status">
-                            <option value="Owned">Owned</option>
-                            <option value="Landless">Landless</option>
-                            <option value="Tenant">Tenant</option>
-                            <option value="Care Taker">Care Taker</option>
-                        </select>
-                    </div>
-                </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label">Household Income</label>
+                <input type="number" class="form-control" name="income" placeholder="enter household income">
+              </div>
             </div>
-        </form>
-        <div class="row mb-3">
-                        <div class="offset-sm-3 col-sm-3 d-grid">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                         </div>
-                        <div class="col-sm-3 d-grid">
-                            <a class="btn btn-outline-primary" href="/mis/household/household.php" role="button">Cancel</a>
-                        </div>
-                    </div>
-                </form>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label">Sanitary Toilet</label>
+                <select class="form-select" name="sanToilet" placeholder="enter sanitary toilet">
+                  <option value="Water-sealed">Water-sealed</option>
+                  <option value="Antipolo">Antipolo</option>
+                  <option value="None">None</option>
+                </select>
+              </div>
             </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label">Water Usage</label>
+                <select class="form-select" name="water" placeholder="enter water usage">
+                  <option value="Faucet">Faucet</option>
+                  <option value="Deep Well">Deep Well</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label">House Ownership Status</label>
+                <select class="form-select" name="ownerStatus" placeholder="enter house ownership status">
+                  <option value="Owned">Owned</option>
+                  <option value="Rent">Rent</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label">Land Ownership Status</label>
+                <select class="form-select" name="landStatus" placeholder="enter land ownership status">
+                  <option value="Owned">Owned</option>
+                  <option value="Landless">Landless</option>
+                  <option value="Tenant">Tenant</option>
+                  <option value="Care Taker">Care Taker</option>
+                </select>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
     </div>
+  </div>
+</div>
+<!-- insert modal -->
+
+<!-- view modal -->
+<div class="modal fade" id="viewusermodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="viewusermodalLabel">View User Data</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="view_user_data"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- view modal -->
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+
+      <?php
+      if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+      ?>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong>Hey!</strong> <?php echo $_SESSION['status']; ?>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <?php
+        unset($_SESSION['status']);
+      }
+      ?>
+
+      <div class="card">
+        <div class="card-header">
+          <h4 class="text-center"></h4>
+          <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#insertdata">
+            Add Household
+          </button>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped table-bordered table-success">
+            <thead>
+              <tr>
+                <th scope="col">ID#</th>
+                <th scope="col">Household Number</th>
+                <th scope="col">Zone</th>
+                <th scope="col">Total Members</th>
+                <th scope="col">Head of the Family</th>
+                <th scope="col">View</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+
+              $connection = mysqli_connect("localhost", "root", "", "mis");
+
+              $fetch_query = "SELECT * FROM household";
+              $fetch_query_run = mysqli_query($connection, $fetch_query);
+
+              if (mysqli_num_rows($fetch_query_run) > 0) {
+                while ($row = mysqli_fetch_array($fetch_query_run)) {
+                  /*echo $row['id']; */
+
+              ?>
+                  <tr>
+                    <td class="user_id"><?php echo $row['id']; ?></td>
+                    <td><?php echo $row['houseNum']; ?></td>
+                    <td><?php echo $row['zone']; ?></td>
+                    <td><?php echo $row['totalMem']; ?></td>
+                    <td><?php echo $row['famHead']; ?></td>
+                    <td>
+                      <a href="" class="btn btn-info btn-sm view_data">View Data</a>
+                    </td>
+                    <td>
+                      <a href="" class="btn btn-success btn-sm">Edit Data</a>
+                    </td>
+                    <td>
+                      <a href="" class="btn btn-danger btn-sm">Delete Data</a>
+                    </td>
+                  </tr>
+                <?php
+                }
+              } else {
+                ?>
+                <tr colspan="4">No Record Found</tr>
+              <?php
+              }
+
+              ?>
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-                
-    <div class="main">
-            <div class="content">
-                <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-                <div class="container my-5">
-                    <div class="d-flex justify-content-center mb-3">
-                        <button type="button" class="btn btn-primary" id="showModal">Add Household</button>
-                    </div>
-                    <br>
-                        <table class="content-table">
-                            <thead>
-                            <tr>
-                                <th>Household Number</th>
-                                <th>Zone</th>
-                                <th>Total Members</th>
-                                <th>Head of the Family</th>
-                                <th>Action</th>               
-                            </tr>
-                            </thead>
-                        <tbody>
-                </div>
+<?php include('includes/footer.php'); ?>
 
-                <?php
-                $servername ="localhost";
-                $username ="root";
-                $password ="";
-                $database ="mis";
+<script>
+  $(document).ready(function () {
+    $('.view_data').click(function (e) {
+      e.preventDefault();
 
-                $connection = new mysqli($servername, $username, $password, $database);
+      var user_id = $(this).closest('tr').find('.user_id').text();
 
-                if ($connection ->connect_error) {
-                    die ("Connection Failed: " . $connection ->connect_error);
-                } 
+      /*console.log(user_id);*/
 
-                $sql_total_records = "SELECT COUNT(*) AS total FROM household";
-                $result_total_records = $connection->query($sql_total_records);
-                $row_total_records = $result_total_records->fetch_assoc();
-                $total_records = $row_total_records['total'];
+      $.ajax({
+        method: "POST",
+        url: "code.php",
+        data: {
+          'click_view_btn': true,
+          'user_id': user_id,
 
-                $recordsPerPage = 10;
-                $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+        },
+        success: function (response){
+          /*console.log(response);*/
 
-                $total_pages = ceil($total_records / $recordsPerPage);
+          $('.view_user_data').html(response);
+          $('#viewusermodal').modal('show');
+        }
+      })
 
-                $offset = ($current_page - 1) * $recordsPerPage;
-
-                $sql = "SELECT * FROM household LIMIT $offset, $recordsPerPage";
-
-                $result = $connection->query($sql);
-
-                if ($result) {
-                    while ($row = $result->fetch_assoc()) {
-
-                        echo "
-                        <tr>
-                            <td>{$row['household_number']}</td>
-                            <td>{$row['zone']}</td>
-                            <td>{$row['total_members']}</td>
-                            <td>{$row['head_of_the_family']}</td>
-                            <td>
-                            <a class='btn btn-primary btn-sm edit-button' data-household-number='{$row['household_number']}' data-zone='{$row['zone']}' data-total-members='{$row['total_members']}' data-head-of-family='{$row['head_of_the_family']}' data-household-income='{$row['household_income']}' data-sanitary-toilet='{$row['sanitary_toilet']}' data-water-usage='{$row['water_usage']}' data-house-ownership-status='{$row['house_ownership_status']}' data-land-ownership-status='{$row['land_ownership_status']}' href='#'>Edit</a>
-                            <a class='btn btn-danger btn-sm' href='/mis/household/delete.php?id={$row['id']}'>Delete</a>
-                            </td>
-                        </tr>
-                        ";
-                        
-                }  
-            }
-               ?>                
-            </tbody> 
-        </table>     
-        <div class="pagination">
-            <?php
-                $total_records = 
-                $total_pages = ceil($total_records / $recordsPerPage);
-
-                if ($current_page > 1) {
-                echo '<a class="btn btn-primary" href="?page=' . ($current_page - 1) . '">Previous</a>';
-                }
-
-                for ($i = max(1, $current_page - 5); $i <= min($current_page + 5, $total_pages); $i++) {
-                    if ($i == $current_page) {
-                     echo '<span class="current-page">' . $i . '</span>';
-                        }  else {
-                    echo '<a class="btn btn-primary" href="?page=' . $i . '">' . $i . '</a>';
-                }
-            }
-
-                    if ($current_page < $total_pages) {
-                        echo '<a class="btn btn-primary" href="?page=' . ($current_page + 1) . '">Next</a>';
-            }
-            ?>
-        </div>       
-    </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script> 
-        <script>
-            document.getElementById("showModal").addEventListener("click", function () {
-            var firstModal = document.getElementById("pop-up-modal");
-            firstModal.style.display = "block"; 
-        });
-
-        document.getElementById("close-modal").addEventListener("click", function () {
-            var firstModal = document.getElementById("pop-up-modal");
-            firstModal.style.display = "none"; 
-        });
-
-        document.querySelectorAll(".edit-button").forEach(function (editButton) {
-            editButton.addEventListener("click", function (event) {
-            event.preventDefault(); 
-
-            var householdNumber = editButton.getAttribute("data-household-number");
-            var zone = editButton.getAttribute("data-zone");
-            var totalMembers = editButton.getAttribute("data-total-members");
-            var headOfFamily = editButton.getAttribute("data-head-of-family");
-            var householdIncome = editButton.getAttribute("data-household-income");
-            var sanitaryToilet = editButton.getAttribute("data-sanitary-toilet");
-            var waterUsage = editButton.getAttribute("data-water-usage");
-            var houseOwnershipStatus = editButton.getAttribute("data-house-ownership-status");
-            var landOwnershipStatus = editButton.getAttribute("data-land-ownership-status");
-
-
-            document.querySelector("[name='household_number']").value = householdNumber;
-            document.querySelector("[name='zone']").value = zone;
-            document.querySelector("[name='total_members']").value = totalMembers;
-            document.querySelector("[name='head_of_the_family']").value = headOfFamily;
-            document.querySelector("[name='household_income']").value = householdIncome;
-            document.querySelector("[name='sanitary_toilet']").value = sanitaryToilet;
-            document.querySelector("[name='water_usage']").value = waterUsage;
-            document.querySelector("[name='house_ownership_status']").value = houseOwnershipStatus;
-            document.querySelector("[name='land_ownership_status']").value = landOwnershipStatus;
-
-            var editModal = document.getElementById("pop-up-modal");
-            editModal.style.display = "block";
-        });
     });
-
-    document.getElementById("close-modal").addEventListener("click", function () {
-    var firstModal = document.getElementById("pop-up-modal");
-    firstModal.style.display = "none";
-});
-
-        </script>
-    </body>
-</html>
+  });
+</script>
