@@ -6,16 +6,16 @@ if (!$con) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$civil_statuses = array("Single", "Married", "Widowed", "Separated");
+$civStatuses = array("Single", "Married", "Widowed", "Separated");
 $labels = [];
 $values = [];
 
-foreach ($civil_statuses as $civil_status) {
-    $civil_statusQuery = mysqli_query($con, "SELECT COUNT(*) FROM residents WHERE civil_status = '$civil_status'");
-    $civil_statusNumRows = mysqli_fetch_row($civil_statusQuery)[0];
+foreach ($civStatuses as $civStatus) {
+    $civStatusQuery = mysqli_query($con, "SELECT COUNT(*) FROM residents WHERE civStatus = '$civStatus'");
+    $civStatusNumRows = mysqli_fetch_row($civStatusQuery)[0];
 
-    $labels[] = $civil_status;
-    $values[] = $civil_statusNumRows;
+    $labels[] = $civStatus;
+    $values[] = $civStatusNumRows;
 }
 
 // Close the database connection

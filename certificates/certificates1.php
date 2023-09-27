@@ -107,11 +107,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="content">
             <div class="container my-5">
                 <div class="btn-group">
-                    <a class="btn btn-primary" href="/mis/certificates/certificates1.php" role="button">Barangay Clearance</a>
+                    <a class="btn btn-primary float-right" href="/mis/certificates/certificates1.php" role="button">Barangay Clearance</a>
                     <a class="btn btn-primary" href="/mis/certificates/certificates.php" role="button">Barangay Indigency</a>
                 </div>
                 <br>
-                    <button type="button" class="btn btn-primary" id="showModal">Add Certificate</button>
+                <button type="button" class="btn btn-primary float-end" id="showModal">Add Certificate</button>
                 <br>
                 <table class="content-table">
                     <thead>
@@ -139,9 +139,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         }
 
                         // Read all rows from database table
-                        $sql = "SELECT c.clearanceNO, r.lname, r.fname, c.purpose, c.orNo, c.id FROM clearance c
-                                JOIN residents r ON c.residentid = r.id";
-                                $result = $connection->query($sql); // Execute the query and store the result
+                        $sql = "SELECT c.clearanceNO, r.lname, r.fname, c.purpose, c.orNo, c.id FROM clearance1 c
+                            JOIN residents r ON c.residentid = r.id";
+                        $result = $connection->query($sql); // Execute the query and store the result
 
                         if (!$result) {
                             die("Invalid Query: " . $connection->error);
@@ -164,10 +164,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         }
 
                         ?>
+
                     </tbody>
                 </table>
-
             </div>
+        </div>
+    </div>
+
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
             <script>
                 document.getElementById("showModal").addEventListener("click", function() {

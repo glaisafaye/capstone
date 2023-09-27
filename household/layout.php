@@ -6,12 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Puntian Management Information System</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-  <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
   <style>
     * {
@@ -95,7 +92,7 @@
     }
 
     #myTable_wrapper {
-      padding: 30px;
+      padding: 1px;
     }
 
     #myTable_filter input[type="search"] {
@@ -107,7 +104,7 @@
     }
 
     #myTable_length select {
-      width: auto; 
+      width: fit-content; 
     }
 
     #myTable_paginate .pagination {
@@ -121,11 +118,11 @@
 
     #myTable tbody td {
       font-size: 14px;
-      padding: 10px; 
+      padding: 5px; 
     }
 
     #myTable {
-      width: 100%; 
+      width: 95%; 
     }
   </style>
   <nav class="navbar navbar-expand-lg custom-navbar">
@@ -142,11 +139,12 @@
 
       $menuItems = array(
         array("Dashboard", "fas fa-th-large", "/mis/dashboard/dashboard.php"),
-        array("Officials", "fas fa-user-tie", "/mis/officials/officials.php"),
+        array("Barangay Officials", "fas fa-user-tie", "/mis/officials/officials.php"),
         array("Household Profiling", "fas fa-house-user", "/mis/household/household.php"),
         array("Resident Profiling", "fas fa-users", "/mis/residents/residents.php"),
         array("Certification", "fas fa-print", "/mis/certificates/certificates.php"),
         array("Decision Support System", "fas fa-chart-bar", "/mis/dss/dss.php"),
+        array("Reports", "fas fa-chart-area", "/mis/reports/reports.php"),
       );
 
 

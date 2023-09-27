@@ -2,7 +2,7 @@
 
 
 <!-- insert modal -->
-<div class="modal fade" id="insertdata" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="viewusermodalLabel" aria-hidden="true">
+<div class="modal fade" id="insertdata" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="insertdataLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -109,7 +109,7 @@
 <!-- insert modal -->
 
 <!-- view modal -->
-<div class="modal fade" id="viewusermodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="viewusermodal" tabindex="-1" aria-labelledby="viewusermodalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -241,7 +241,7 @@
 
 <div class="container my-5">
   <div class="d-flex justify-content-center mb-3">
-    <div class="col-md-9">
+    <div class="col-md-10">
 
       <?php
       if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
@@ -254,10 +254,9 @@
         unset($_SESSION['status']);
       }
       ?>
-      <div class="container my-15">
+      <div class="container my-20">
         <div class="d-flex justify-content-center mb-3">
-          <div class="col-md-9">
-
+          <div class="col-md-10">
 
             <div class="card">
               <div class="card-header">
@@ -270,13 +269,12 @@
                 <table class="table table-striped table-bordered table-success" id="myTable">
                   <thead>
                     <tr>
-                      <th scope="col">ID#</th>
-                      <th scope="col">Household Number</th>
-                      <th scope="col">Zone</th>
-                      <th scope="col">Total Members</th>
-                      <th scope="col">Head of the Family</th>
-                      <th scope="col">Action</th>
-                    </tr>
+                      <th style="width: 50px !important;">ID#</th>
+                      <th style="width: 120px !important;">Household Number</th>
+                      <th style="width: 50px !important;">Zone</th>
+                      <th style="width: 100px !important;">Total Members</th>
+                      <th style="width: 130px !important;">Head of the Family</th>
+                      <th style="width: 110px !important;">Action</th>                    </tr>
                   </thead>
                   <tbody>
                     <?php
@@ -321,126 +319,130 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
 
+<script>
+  /*view data*/
+  $(document).ready(function() {
+    $('.view_data').click(function(e) {
+      e.preventDefault();
 
-      <script>
-        /*view data*/
-        $(document).ready(function() {
-          $('.view_data').click(function(e) {
-            e.preventDefault();
+      var user_id = $(this).closest('tr').find('.user_id').text();
 
-            var user_id = $(this).closest('tr').find('.user_id').text();
+      /*console.log(user_id);*/
 
-            /*console.log(user_id);*/
+      $.ajax({
+        method: "POST",
+        url: "code.php",
+        data: {
+          'click_view_btn': true,
+          'user_id': user_id,
 
-            $.ajax({
-              method: "POST",
-              url: "code.php",
-              data: {
-                'click_view_btn': true,
-                'user_id': user_id,
+        },
+        success: function(response) {
+          /*console.log(response);*/
 
-              },
-              success: function(response) {
-                /*console.log(response);*/
+          $('.view_user_data').html(response);
+          $('#viewusermodal').modal('show');
+        }
+      })
 
-                $('.view_user_data').html(response);
-                $('#viewusermodal').modal('show');
-              }
-            })
+    });
+  });
+  /*view data*/
 
+  /*edit data*/
+  $(document).ready(function() {
+    $('.edit_data').click(function(e) {
+      e.preventDefault();
+
+      var user_id = $(this).closest('tr').find('.user_id').text();
+      /*console.log(user_id);*/
+
+      $.ajax({
+        method: "POST",
+        url: "code.php",
+        data: {
+          'click_edit_btn': true,
+          'user_id': user_id,
+
+        },
+        success: function(response) {
+          /*console.log(response);*/
+
+          $.each(response, function(Key, value) {
+
+            /*console.log(value['houseNum'])*/
+
+            $('#user_id').val(value['id']);
+            $('#houseNum').val(value['houseNum']);
+            $('#zone').val(value['zone']);
+            $('#totalMem').val(value['totalMem']);
+            $('#famHead').val(value['famHead']);
+            $('#income').val(value['income']);
+            $('#sanToilet').val(value['sanToilet']);
+            $('#water').val(value['water']);
+            $('#ownerStatus').val(value['ownerStatus']);
+            $('#landStatus').val(value['landStatus']);
           });
-        });
-        /*view data*/
 
+          $('#editdata').modal('show');
+        }
+      });
 
-        /*edit data*/
-        $(document).ready(function() {
-          $('.edit_data').click(function(e) {
-            e.preventDefault();
+    });
+  });
+  /*edit data*/
 
-            var user_id = $(this).closest('tr').find('.user_id').text();
-            /*console.log(user_id);*/
+  /* delete data */
+  $(document).ready(function() {
+    $('.delete_btn').click(function(e) {
+      e.preventDefault();
+      /*console.log('hello');*/
 
-            $.ajax({
-              method: "POST",
-              url: "code.php",
-              data: {
-                'click_edit_btn': true,
-                'user_id': user_id,
+      var user_id = $(this).closest('tr').find('.user_id').text();
+      /*console.log('user_id');*/
 
-              },
-              success: function(response) {
-                /*console.log(response);*/
+      $.ajax({
+        method: "POST",
+        url: "code.php",
+        data: {
+          click_delete_btn: true,
+          'id': user_id,
+        },
 
-                $.each(response, function(Key, value) {
+        success: function(response) {
+          console.log(response);
+          window.location.reload();
+        }
+      });
+      /* delete data */
 
-                  /*console.log(value['houseNum'])*/
+    });
+  });
+  /* delete data */
 
-                  $('#user_id').val(value['id']);
-                  $('#houseNum').val(value['houseNum']);
-                  $('#zone').val(value['zone']);
-                  $('#totalMem').val(value['totalMem']);
-                  $('#famHead').val(value['famHead']);
-                  $('#income').val(value['income']);
-                  $('#sanToilet').val(value['sanToilet']);
-                  $('#water').val(value['water']);
-                  $('#ownerStatus').val(value['ownerStatus']);
-                  $('#landStatus').val(value['landStatus']);
-                });
+  /* search data */
+  $(document).ready(function() {
+    $("#searchBox").on("keyup", function() {
+      var query = $(this).val().toLowerCase();
 
-                $('#editdata').modal('show');
-              }
-            });
+      $("table tbody tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(query) > -1);
+      });
+    });
+  });
+  /* search data */
 
-          });
-        });
-        /*edit data*/
-
-        /* delete data */
-        $(document).ready(function() {
-          $('.delete_btn').click(function(e) {
-            e.preventDefault();
-            /*console.log('hello');*/
-
-            var user_id = $(this).closest('tr').find('.user_id').text();
-            /*console.log('user_id');*/
-
-            $.ajax({
-              method: "POST",
-              url: "code.php",
-              data: {
-                click_delete_btn: true,
-                'id': user_id,
-              },
-
-              success: function(response) {
-                console.log(response);
-                window.location.reload();
-              }
-            });
-            /* delete data */
-
-          });
-        });
-        /* delete data */
-
-        /* search data */
-        $(document).ready(function() {
-          $("#searchBox").on("keyup", function() {
-            var query = $(this).val().toLowerCase();
-
-            $("table tbody tr").filter(function() {
-              $(this).toggle($(this).text().toLowerCase().indexOf(query) > -1);
-            });
-          });
-        });
-        /* search data */
-
-        /*pagination*/
-        $(document).ready(function() {
-          $('#myTable').DataTable();
-        });
-        /*pagination*/
-      </script>
+  /*pagination*/
+  $(document).ready(function() {
+    $('#myTable').DataTable();
+  });
+  /*pagination*/
+</script>

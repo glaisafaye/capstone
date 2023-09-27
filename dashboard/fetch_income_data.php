@@ -11,7 +11,7 @@ $values = [];
 
 foreach ($incomeGroups as $incomeGroup) {
     // Modify this query to count residents with income in the specified income group
-    $incomeQuery = mysqli_query($con, "SELECT COUNT(*) FROM household WHERE household_income = '$incomeGroup'");
+    $incomeQuery = mysqli_query($con, "SELECT COUNT(*) FROM household WHERE income = '$incomeGroup'");
     $incomeNumRows = mysqli_fetch_row($incomeQuery)[0];
 
     $labels[] = $incomeGroup;

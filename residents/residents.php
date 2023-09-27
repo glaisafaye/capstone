@@ -1,385 +1,501 @@
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "mis";
+<?php include 'layout.php' ?>
 
-// Create connection
-$connection = new mysqli($servername, $username, $password, $database);
+<!-- insert modal -->
+<div class="modal fade" id="insertdata" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="insertdataLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="insertdataLabel">Enter Resident Information</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="code.php" method="POST">
+        <div class="modal-body">
 
-$fname = "";
-$lname = "";
-$mname = "";
-$phone = "";
-$gender = "";
-$birthday = "";
-$civil_status = "";
-$household_number = "";
-$differently_abled_person = "";
-$zone = "";
-$total_household_member = "";
-$relationship_to_head = "";
-$employment_status = "";
-$religion = "";
-$income = "";
-$educational_attainment = "";
-$remarks = "";
-$nationality = "";
-
-$errorMessage = "";
-$successMessage = "";
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $fname = isset($_POST["fname"]) ? $_POST["fname"] : "";
-    $lname = isset($_POST["lname"]) ? $_POST["lname"] : "";
-    $mname = $_POST["mname"]; 
-    $phone = $_POST["phone"];
-    $gender = $_POST["gender"];
-    $birthday = $_POST["birthday"];
-    $civil_status = $_POST["civil_status"];
-    $household_number = $_POST["household_number"];
-    $differently_abled_person = $_POST["differently_abled_person"];
-    $zone = $_POST["zone"];
-    $total_household_member = $_POST["total_household_member"];
-    $relationship_to_head = $_POST["relationship_to_head"];
-    $employment_status = $_POST["employment_status"];
-    $religion = $_POST["religion"];
-    $income = $_POST["income"];
-    $educational_attainment = $_POST["educational_attainment"];
-    $remarks = $_POST["remarks"];
-    $nationality  = $_POST["nationality"];
-
-    if (isset($_POST["submit"])) {
-        
-        $sql = "INSERT INTO residents (`fname`, `lname`, `mname`, `phone`, `gender`, `birthday`, `civil_status`, `household_number`, `differently_abled_person`, `zone`, `total_household_member`, `relationship_to_head`, `employment_status`, `religion`, `income`, `educational_attainment`, `remarks`, `nationality`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        $stmt = $connection->prepare($sql);
-
-        $stmt->bind_param(
-            "ssssssssssssssssss",
-            $fname,
-            $lname,
-            $mname,
-            $phone,
-            $gender,
-            $birthday,
-            $civil_status,
-            $household_number,
-            $differently_abled_person,
-            $zone,
-            $total_household_member,
-            $relationship_to_head,
-            $employment_status,
-            $religion,
-            $income,
-            $educational_attainment,
-            $remarks,
-            $nationality,
-        );
-
-        $result = $stmt->execute();
-
-        if (!$result) {
-            $errorMessage = "Error: " . $stmt->error;
-        } else {
-
-            $successMessage = "Resident added correctly";
-            header("location: /mis/residents/residents.php");
-            exit;
-        }
-    }
-}
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-
-</head>
-
-<body>
-    <?php
-        include 'layout.php';
-        ?>
-
-<div id="pop-up-modal" class="modal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <h3 class="modal-title">Enter Resident Information</h3>
-            <div class="modal-body modal-dialog-scrollable">
-                <form method="post">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Last Name</label>
-                                <input type="text" class="form-control" name="lname" value="<?php echo $lname; ?>">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">First Name</label>
-                                <input type="text" class="form-control" name="fname" value="<?php echo $fname; ?>">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Middle Name</label>
-                                <input type="text" class="form-control" name="mname" value="<?php echo $mname; ?>">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Phone</label>
-                                <input type="text" class="form-control" name="phone" value="<?php echo $phone; ?>">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Gender</label>
-                                <select class="form-select" name="gender">
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Civil Status</label>
-                                <select class="form-select" name="civil_status">
-                                    <option value="single">Single</option>
-                                    <option value="married">Married</option>
-                                    <option value="divorced">Divorced</option>
-                                    <option value="widowed">Widowed</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Birthday</label>
-                                <input id="Birthday" name="birthday" class="form-control" type="date" placeholder="birthday" value="<?php echo $birthday; ?>">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="col-sm-3 col-form-label">Household Number</label>
-                                <input type="text" class="form-control" name="household_number" value="<?php echo $household_number; ?>">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Differently-abled Person</label>
-                                <select class="form-select" name="differently_abled_person">
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Zone Number</label>
-                                <select class="form-select" name="zone">
-                                    <option value="Zone 1">Zone 1</option>
-                                    <option value="Zone 2">Zone 2</option>
-                                    <option value="Zone 3">Zone 3</option>
-                                    <option value="Zone 4">Zone 4</option>
-                                    <option value="Zone 5">Zone 5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="col-sm-3 col-form-label">Total Household Member</label>
-                                <input type="text" class="form-control" name="total_household_member" value="<?php echo $total_household_member; ?>">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="col-sm-3 col-form-label">Relationship to Head</label>            
-                                <input type="text" class="form-control" name="relationship_to_head" value="<?php echo $relationship_to_head; ?>">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Employment Status</label>
-                                <select class="form-select" name="employment_status">
-                                    <option value="Employed">Employed</option>
-                                    <option value="Unemployed">Unemployed</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="col-sm-3 col-form-label">Religion</label>               
-                                <input type="text" class="form-control" name="religion" value="<?php echo $religion; ?>">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="col-sm-3 col-form-label">Income</label>               
-                                <input type="text" class="form-control" name="income" value="<?php echo $income; ?>">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="form-label">Educational Attainment</label>
-                                <select class="form-select" name="educational_attainment">
-                                    <option value="none">None</option>
-                                    <option value="Elementary_Level">Elementary Level</option>
-                                    <option value="Elementary_Graduate">Elementary Graduate</option>
-                                    <option value="High_School_Level">High School Level</option>
-                                    <option value="High_School_Graduate">High School Graduate</option>
-                                    <option value="Senior_High_Level">Senior High Level</option>
-                                    <option value="Senior_High_Graduate">Senior High Graduate</option>
-                                    <option value="College_Level">College Level</option>
-                                    <option value="College_Graduate">College Graduate</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="col-sm-3 col-form-label">Remarks</label>
-                                <input type="text" class="form-control" name="remarks" value="<?php echo $remarks; ?>">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label class="col-sm-3 col-form-label">Nationality</label>
-                                <input type="text" class="form-control" name="nationality" value="<?php echo $nationality; ?>">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="offset-sm-3 col-sm-3 d-grid">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                            <div class="col-sm-3 d-grid">
-                                <a class="btn btn-outline-primary" href="/mis/residents/residents.php" role="button">Cancel</a>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
+          <div class="form-group">
+            <label class="control-label">Last Name:</label>
+            <input name="lname" class="form-control input-sm" type="text" placeholder="Last Name" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">First Name:</label>
+            <input name="fname" class="form-control input-sm" type="text" placeholder="First Name" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Middle Name:</label>
+            <input name="mname" class="form-control input-sm" type="text" placeholder="Middle Name" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Contact Number:</label>
+            <input name="contactNum" class="form-control input-sm input-size" type="number" placeholder="Contact Number" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Gender:</label>
+            <select name="gender" class="form-control input-sm">
+              <option selected="" disabled="">-Select Gender-</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Civil Status:</label>
+            <select name="civStatus" class="form-control input-sm input-size">
+              <option selected="" disabled="">-Select Civil Status-</option>
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+              <option value="Divorced">Divorced</option>
+              <option value="Widowed">Widowed</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Birthday:</label>
+            <input name="bday" class="form-control input-sm input-size" type="date" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Household Number:</label>
+            <input name="houseNum" class="form-control input-sm input-size" type="number" min="1" placeholder="Household Number" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Differently-abled Person:</label>
+            <select name="abledPerson" class="form-control input-sm input-size">
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Zone:</label>
+            <select name="zone" class="form-control input-sm input-size">
+              <option selected="" disabled="">-Select Zone-</option>
+              <option value="Zone 1">Zone 1</option>
+              <option value="Zone 2">Zone 2</option>
+              <option value="Zone 3">Zone 3</option>
+              <option value="Zone 4">Zone 4</option>
+              <option value="Zone 5">Zone 5</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Total Household Member:</label>
+            <input name="totalHouseMem" class="form-control input-sm" type="number" min="1" placeholder="Total Household Member" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Relationship to Head:</label>
+            <input name="relateToHead" class="form-control input-sm" type="text" placeholder="Relationship to Head" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Employment Status:</label>
+            <select name="employStatus" class="form-control input-sm">
+              <option selected="" disabled="">-Select Employment Status-</option>
+              <option value="Employed">Employed</option>
+              <option value="Unemployed">Unemployed</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Religion:</label>
+            <input name="religion" class="form-control input-sm" type="text" placeholder="Relationship to Head" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Income:</label>
+            <input name="income" class="form-control input-sm" type="number" placeholder="Relationship to Head" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Educational Attainment:</label>
+            <select name="education" class="form-control input-sm input-size">
+              <option selected="" disabled="">-Educational Attainment-</option>
+              <option value="none">None</option>
+              <option value="Elementary Level">Elementary Level</option>
+              <option value="Elementary Graduate">Elementary Graduate</option>
+              <option value="High School_Level">High School Level</option>
+              <option value="High School Graduate">High School Graduate</option>
+              <option value="Senior High Level">Senior High Level</option>
+              <option value="Senior High Graduate">Senior High Graduate</option>
+              <option value="College Level">College Level</option>
+              <option value="College Graduate">College Graduate</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Remarks:</label>
+            <input name="remarks" class="form-control input-sm input-size" type="text" placeholder="Remarks" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Nationality:</label>
+            <input name="nationality" class="form-control input-sm input-size" type="text" placeholder="Remarks" />
+          </div>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" name="save_data" class="btn btn-primary">Save Data</button>
+        </div>
+      </form>
     </div>
+  </div>
+</div>
+<!-- insert modal -->
+
+<!-- view modal -->
+<div class="modal fade" id="viewusermodal" tabindex="-1" aria-labelledby="viewusermodalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="viewusermodalLabel">View User Data</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="view_user_data"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- view modal -->
+
+<!-- edit modal -->
+<div class="modal fade" id="editdata" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editdataLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editdataLabel">Edit Resident Information</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="code.php" method="POST">
+        <div class="modal-body">
+
+          <div class="mb-3">
+            <input type="hidden" class="form-control" id='user_id' name="id">
+          </div>
+          <div class="form-group">
+            <label class="control-label">Last Name:</label>
+            <input name="lname" class="form-control input-sm" id='lname' type="text" placeholder="Last Name" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">First Name:</label>
+            <input name="fname" class="form-control input-sm" id='fname' type="text" placeholder="First Name" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Middle Name:</label>
+            <input name="mname" class="form-control input-sm" id='mname' type="text" placeholder="Middle Name" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Contact Number:</label>
+            <input name="contactNum" class="form-control input-sm input-size" id='contactNum' type="number" placeholder="Contact Number" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Gender:</label>
+            <select name="gender" id='gender' class="form-control input-sm">
+              <option selected="" disabled="">-Select Gender-</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Civil Status:</label>
+            <select name="civStatus" id='civStatus' class="form-control input-sm input-size">
+              <option selected="" disabled="">-Select Civil Status-</option>
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+              <option value="Divorced">Divorced</option>
+              <option value="Widowed">Widowed</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Birthday:</label>
+            <input name="bday" id='bday' class="form-control input-sm input-size" type="date" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Household Number:</label>
+            <input name="houseNum" class="form-control input-sm input-size" id='houseNum' type="number" min="1" placeholder="Household Number" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Differently-abled Person:</label>
+            <select name="abledPerson" id='abledPerson' class="form-control input-sm input-size">
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Zone:</label>
+            <select name="zone" id='zone' class="form-control input-sm input-size">
+              <option selected="" disabled="">-Select Zone-</option>
+              <option value="Zone 1">Zone 1</option>
+              <option value="Zone 2">Zone 2</option>
+              <option value="Zone 3">Zone 3</option>
+              <option value="Zone 4">Zone 4</option>
+              <option value="Zone 5">Zone 5</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Total Household Member:</label>
+            <input name="totalHouseMem" class="form-control input-sm" id='totalHouseMem' type="number" min="1" placeholder="Total Household Member" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Relationship to Head:</label>
+            <input name="relateToHead" class="form-control input-sm" id='relateToHead' type="text" placeholder="Relationship to Head" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Employment Status:</label>
+            <select name="employStatus" id='employStatus' class="form-control input-sm">
+              <option selected="" disabled="">-Select Employment Status-</option>
+              <option value="Employed">Employed</option>
+              <option value="Unemployed">Unemployed</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Religion:</label>
+            <input name="religion" class="form-control input-sm" id='religion' type="text" placeholder="Relationship to Head" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Income:</label>
+            <input name="income" class="form-control input-sm" id='income' type="number" placeholder="Relationship to Head" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Educational Attainment:</label>
+            <select name="education" id='education' class="form-control input-sm input-size">
+              <option selected="" disabled="">-Educational Attainment-</option>
+              <option value="none">None</option>
+              <option value="Elementary Level">Elementary Level</option>
+              <option value="Elementary Graduate">Elementary Graduate</option>
+              <option value="High School_Level">High School Level</option>
+              <option value="High School Graduate">High School Graduate</option>
+              <option value="Senior High Level">Senior High Level</option>
+              <option value="Senior High Graduate">Senior High Graduate</option>
+              <option value="College Level">College Level</option>
+              <option value="College Graduate">College Graduate</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Remarks:</label>
+            <input name="remarks" class="form-control input-sm input-size" id='remarks' type="text" placeholder="Remarks" />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Nationality:</label>
+            <input name="nationality" class="form-control input-sm input-size" id='nationality' type="text" placeholder="Remarks" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" name="update_data" class="btn btn-primary">Update Data</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- edit modal -->
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+
+      <?php
+      if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+      ?>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong>Hey!</strong> <?php echo $_SESSION['status']; ?>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <?php
+        unset($_SESSION['status']);
+      }
+      ?>
+      <div class="container my-18">
+        <div class="d-flex justify-content-center mb-3">
+          <div class="col-md-10">
+
+            <div class="card">
+              <div class="card-header">
+                <h4 class="text-center"></h4>
+                <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#insertdata">
+                  Add Resident
+                </button>
+              </div>
+              <div class="card-body">
+                <table class="table table-striped table-bordered table-success" id="myTable">
+                  <thead>
+                    <tr>
+                      <th scope="col">ID#</th>
+                      <th style="width: 140px !important;">Household Number</th>
+                      <th scope="col">Last Name</th>
+                      <th style="width: 130px !important;">First Name</th>
+                      <th scope="col">Gender</th>
+                      <th scope="col">Zone</th>
+                      <th style="width: 130px !important;">Action</th>                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+
+                    $connection = mysqli_connect("localhost", "root", "", "mis");
+
+                    $fetch_query = "SELECT * FROM residents";
+                    $fetch_query_run = mysqli_query($connection, $fetch_query);
+
+                    if (mysqli_num_rows($fetch_query_run) > 0) {
+                      while ($row = mysqli_fetch_array($fetch_query_run)) {
+                        /*echo $row['id']; */
+
+                    ?>
+                        <tr>
+                          <td class="user_id"><?php echo $row['id']; ?></td>
+                          <td><?php echo $row['houseNum']; ?></td>
+                          <td><?php echo $row['lname']; ?></td>
+                          <td><?php echo $row['fname']; ?></td>
+                          <td><?php echo $row['gender']; ?></td>
+                          <td><?php echo $row['zone']; ?></td>
+                          <td>
+                            <a href="#" class="btn btn-info btn-sm view_data">View</a>
+                            <a href="#" class="btn btn-success btn-sm edit_data">Edit</a>
+                            <a href="#" class="btn btn-danger btn-sm delete_btn">Delete</a>
+                          </td>
+                        </tr>
+                      <?php
+                      }
+                    } else {
+                      ?>
+                      <tr colspan="4">No Record Found</tr>
+                    <?php
+                    }
+
+                    ?>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
 
-    <div class="main">
-            <div class="content">
-                <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-                <div class="container my-5">
-                    <div class="d-flex justify-content-center mb-3">
-                        <button type="button" class="btn btn-primary" id="showModal">Add Resident</button>
-                    </div>
-                    <br>
-            <table class="content-table">
-                <thead>
-                    <tr>
-                        <th>Household Number</th>
-                        <th>Last Name</th>
-                        <th>First Name</th>
-                        <th>Gender</th>
-                        <th>Zone</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
+<script>
+  /*view data*/
+  $(document).ready(function() {
+    $('.view_data').click(function(e) {
+      e.preventDefault();
 
-                <?php 
-               
-                $servername ="localhost";
-                $username ="root";
-                $password ="";
-                $database ="mis";
+      var user_id = $(this).closest('tr').find('.user_id').text();
 
-                $connection = new mysqli($servername, $username, $password, $database);
+      /*console.log(user_id);*/
 
-                if ($connection ->connect_error) {
-                    die ("Connection Failed: " . $connection ->connect_error);
-                } 
+      $.ajax({
+        method: "POST",
+        url: "code.php",
+        data: {
+          'click_view_btn': true,
+          'user_id': user_id,
 
-                $sql_total_records = "SELECT COUNT(*) AS total FROM residents";
-                $result_total_records = $connection->query($sql_total_records);
-                $row_total_records = $result_total_records->fetch_assoc();
-                $total_records = $row_total_records['total'];
+        },
+        success: function(response) {
+          /*console.log(response);*/
 
-                $recordsPerPage = 10;
-                $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-
-                $total_pages = ceil($total_records / $recordsPerPage);
-
-                $offset = ($current_page - 1) * $recordsPerPage;
-
-                $sql = "SELECT * FROM residents LIMIT $offset, $recordsPerPage";
-
-                $result = $connection->query($sql);
-
-                if ($result) {
-                    while ($row = $result->fetch_assoc()) {
-
-                    echo "
-                    <tr>
-                        <td>{$row['household_number']}</td>
-                        <td>{$row['lname']}</td>
-                        <td>{$row['fname']}</td>
-                        <td>{$row['gender']}</td>
-                        <td>{$row['zone']}</td>
-                        <td>
-                <a class='btn btn-primary btn-sm' href='/mis/residents/edit.php?id={$row['id']}'>Edit</a> 
-                <a class='btn btn-danger btn-sm' href='/mis/residents/delete.php?id={$row['id']}'>Delete</a>
-            </td>
-        </tr>
-        ";
+          $('.view_user_data').html(response);
+          $('#viewusermodal').modal('show');
         }
-        } else {
-            echo "Error executing SQL query: " . $connection->error;
+      })
+
+    });
+  });
+  /*view data*/
+
+  /*edit data*/
+  $(document).ready(function() {
+    $('.edit_data').click(function(e) {
+      e.preventDefault();
+
+      var user_id = $(this).closest('tr').find('.user_id').text();
+      /*console.log(user_id);*/
+
+      $.ajax({
+        method: "POST",
+        url: "code.php",
+        data: {
+          'click_edit_btn': true,
+          'user_id': user_id,
+
+        },
+        success: function(response) {
+          /*console.log(response);*/
+
+          $.each(response, function(Key, value) {
+
+            /*console.log(value['houseNum'])*/
+
+            $('#user_id').val(value['id']);
+            $('#lname').val(value['lname']);
+            $('#fname').val(value['fname']);
+            $('#mname').val(value['mname']);
+            $('#contactNum').val(value['contactNum']);
+            $('#gender').val(value['gender']);
+            $('#bday').val(value['bday']);
+            $('#civStatus').val(value['civStatus']);
+            $('#houseNum').val(value['houseNum']);
+            $('#abledPerson').val(value['abledPerson']);
+            $('#zone').val(value['zone']);
+            $('#totalHouseMem').val(value['totalHouseMem']);
+            $('#relateToHead').val(value['relateToHead']);
+            $('#employStatus').val(value['employStatus']);
+            $('#religion').val(value['religion']);
+            $('#income').val(value['income']);
+            $('#education').val(value['education']);
+            $('#remarks').val(value['remarks']);
+            $('#nationality').val(value['nationality']);
+          });
+
+
+          $('#editdata').modal('show');
         }
+      });
 
-           ?>                
-        </tbody> 
-    </table>          
-    
-        <div class="pagination">
-            <?php
-                $total_records = 
-                $total_pages = ceil($total_records / $recordsPerPage);
+    });
+  });
+  /*edit data*/
 
-                if ($current_page > 1) {
-                echo '<a class="btn btn-primary" href="?page=' . ($current_page - 1) . '">Previous</a>';
-                }
+  /* delete data */
+  $(document).ready(function() {
+    $('.delete_btn').click(function(e) {
+      e.preventDefault();
+      /*console.log('hello');*/
 
-                for ($i = max(1, $current_page - 5); $i <= min($current_page + 5, $total_pages); $i++) {
-                    if ($i == $current_page) {
-                     echo '<span class="current-page">' . $i . '</span>';
-                        }  else {
-                    echo '<a class="btn btn-primary" href="?page=' . $i . '">' . $i . '</a>';
-                }
-            }
+      var user_id = $(this).closest('tr').find('.user_id').text();
+      /*console.log('user_id');*/
 
-                    if ($current_page < $total_pages) {
-                        echo '<a class="btn btn-primary" href="?page=' . ($current_page + 1) . '">Next</a>';
-            }
-            ?>
+      $.ajax({
+        method: "POST",
+        url: "code.php",
+        data: {
+          click_delete_btn: true,
+          'id': user_id,
+        },
 
-        </div>
-    </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script> 
-        <script>
-            document.getElementById("showModal").addEventListener("click", function () {
-            var firstModal = document.getElementById("pop-up-modal");
-            firstModal.style.display = "block"; 
-        });
+        success: function(response) {
+          console.log(response);
+          window.location.reload();
+        }
+      });
+      /* delete data */
 
-       
-        document.getElementById("close-modal").addEventListener("click", function () {
-            var firstModal = document.getElementById("pop-up-modal");
-            firstModal.style.display = "none"; 
-        });
-        </script>
-</body>
-</html>
+    });
+  });
+  /* delete data */
+
+  /* search data */
+  $(document).ready(function() {
+    $("#searchBox").on("keyup", function() {
+      var query = $(this).val().toLowerCase();
+
+      $("table tbody tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(query) > -1);
+      });
+    });
+  });
+  /* search data */
+
+  /*pagination*/
+  $(document).ready(function() {
+    $('#myTable').DataTable();
+  });
+
+  /*pagination*/
+</script>

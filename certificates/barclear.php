@@ -341,7 +341,7 @@
                     <img class="logo-right" src="logo2.PNG" alt="Right Logo"></img>
                 </div>
                 <div class="or">
-                    <h2>C. NO. 07-2023-234</h2><br>
+                    <h2>C. NO. <?= $clearanceNO ?></h2><br>
                 </div>
                 <div class="certificate">
                     <h2>BARANGAY CLEARANCE</h2><br>
@@ -350,28 +350,28 @@
                     <h2>TO WHOM IT MAY CONCERN:</h2>
                 </div>
                 <div class="first">
-                    <p>THIS IS TO CERTIFY THAT CATHERINE H. GAID a bonafide resident of Puntian, Sumilao, Bukidnon whose, signature/thumbmarks and other relevant information appeared hereunder is a person of good moral character and has no civil/criminal/miscellaneous case/s, involvement to any crime punishable by law, nor has any pending legal charges filed against him/her as per record of the barangay on the date of the issuance.</p>
+                    <p>THIS IS TO CERTIFY THAT <?= $residentName ?> a bonafide resident of Puntian, Sumilao, Bukidnon whose, signature/thumbmarks and other relevant information appeared hereunder is a person of good moral character and has no civil/criminal/miscellaneous case/s, involvement to any crime punishable by law, nor has any pending legal charges filed against him/her as per record of the barangay on the date of the issuance.</p>
                 </div>
                 <div class="birth">
-                    <h2>Date of Birth	:</h2>
+                    <h2>Date of Birth	: <?= $dateOfBirth ?></h2>
                 </div>
                 <div class="birth">
-                    <h2>Age		:</h2>
+                    <h2>Age		: <?= $age ?></h2>
                 </div>
                 <div class="birth">
-                    <h2>Place of Birth	:</h2>
+                    <h2>Place of Birth	: Puntian Sumilao Bukidnon</h2>
                 </div>
                 <div class="birth">
-                    <h2>Gender		: </h2>
+                    <h2>Gender		: <?= $gender ?></h2>
                 </div>
                 <div class="birth">
-                    <h2>Civil Status	: </h2>
+                    <h2>Civil Status	: <?= $civilStatus ?></h2>
                 </div>
                 <div class="signatures1">
                     Signature<br><br>
                  </div>
                  <div class="purpose">
-                    PURPOSE      :<br><br>
+                    PURPOSE      : <?= $purpose ?><br><br>
                  </div>
                  <div class="date">
                     <h2>Issued this   18th     day of July , 2023  at Puntian, Sumilao, Bukidnon, Philippines.</h2>
@@ -383,7 +383,7 @@
                     Punong Barangay<br><br>
                  </div>
                  <div class="ornum">
-                    <h2>O. R. </h2>
+                    <h2>O. R. <?= $orNumber ?></h2>
                 </div>
                  
         </div>
