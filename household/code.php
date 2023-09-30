@@ -2,7 +2,7 @@
 session_start();
 $connection = mysqli_connect("localhost", "root", "", "mis");
 /* insert data */
-if (isset($_POST['save_data'])) {
+if (isset($_POST['save_data'])) {   
 
   $id = $_POST["id"];
   $houseNum = $_POST["houseNum"];
@@ -58,8 +58,9 @@ if (isset($_POST['click_view_btn'])) {
   }
 }
 
-/*edit data */
+/* edit data */
 if (isset($_POST['click_edit_btn'])) {
+
   $id = $_POST['user_id'];
   $arrayresult = [];
 
@@ -70,9 +71,9 @@ if (isset($_POST['click_edit_btn'])) {
   if (mysqli_num_rows($fetch_query_run) > 0) {
     while ($row = mysqli_fetch_array($fetch_query_run)) {
 
-     array_push($arrayresult, $row);
-     header('content-type: application/json');
-     echo json_encode($arrayresult);
+      array_push($arrayresult, $row);
+      header('content-type: application/json');
+      echo json_encode($arrayresult);
     }
   } 
   else 
@@ -94,16 +95,14 @@ if (isset($_POST['update_data'])) {
   $ownerStatus = $_POST['ownerStatus'];
   $landStatus = $_POST['landStatus'];
 
-  $update_query = "UPDATE household SET houseNum='$houseNum', zone='$zone', totalMem='$totalMem', famHead='$famHead', income='$income', sanToilet='$sanToilet', water='$water', ownerStatus='$ownerStatus', landStatus='$landStatus' WHERE id ='id'";
+  $update_query = "UPDATE household SET houseNum='$houseNum', zone='$zone', totalMem='$totalMem', famHead='$famHead', income='$income', sanToilet='$sanToilet', water='$water', ownerStatus='$ownerStatus', landStatus='$landStatus' WHERE id='$id'";
   $update_query_run = mysqli_query($connection, $update_query);
 
-  if($update_query_run)
-  {
+  if($update_query_run) {
     $_SESSION['status'] = "Data updated successfully";
     header('location: household.php');
-  }
-  else{
-    $_SESSION['status'] = "Data not updated successfully";
+  } else {
+    $_SESSION['status'] = "Data not updated";
     header('location: household.php');
   }
 }
