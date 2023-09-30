@@ -99,8 +99,8 @@
                     <canvas id="doughnut2"></canvas>
                 </div>
                 <div class="chart">
-                    <h2>Population by Age</h2>
-                    <canvas id="lineChart1"></canvas>
+                    <h2>Employment Ratio</h2>
+                    <canvas id="barchart"></canvas>
                 </div>
             </div>
         </div>

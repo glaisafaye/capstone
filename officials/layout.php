@@ -52,7 +52,7 @@
     }
 
     .container {
-      display:flow-root;
+      display: flow-root;
       flex-direction: column;
       width: 250%;
     }
@@ -95,8 +95,8 @@
       padding: 1px;
     }
 
-    #myTable_filter input[type="search"] {
-      width: 100%; 
+    #myTable_filter input[placeholder="search"] {
+      width: 100%;
       padding: 5px;
       border: 1px solid #ccc;
       border-radius: 5px;
@@ -104,7 +104,7 @@
     }
 
     #myTable_length select {
-      width:fit-content; 
+      width: fit-content;
     }
 
     #myTable_paginate .pagination {
@@ -118,13 +118,66 @@
 
     #myTable tbody td {
       font-size: 14px;
-      padding: 5px; 
+      padding: 5px;
     }
 
     #myTable {
-      width: 95%; 
+      width: 95%;
     }
+
+    .btn-status {
+      padding: 5px 10px;
+      margin: 0 5px;
+      border-radius: 5px;
+      font-size: 14px;
+      font-weight: bold;
+      width: auto;
+    }
+
+    .btn-success.active-status {
+      background-color: #28a745;
+      border-color: #28a745;
+      color: #fff;
+    }
+
+    .btn-danger.inactive-status {
+      background-color: #dc3545;
+      border-color: #dc3545;
+      color: #fff;
+    }
+
+    .select-size {
+      width: 100%;
+    }
+
+    .input-size {
+      width: 100%;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      max-width: 450px;
+      margin: 0 auto;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
   </style>
+
   <nav class="navbar navbar-expand-lg custom-navbar">
     <div class="container-fluid">
       <a class="navbar-brand">Puntian, Sumilao</a>
@@ -142,8 +195,9 @@
         array("Barangay Officials", "fas fa-user-tie", "/mis/officials/officials.php"),
         array("Household Profiling", "fas fa-house-user", "/mis/household/household.php"),
         array("Resident Profiling", "fas fa-users", "/mis/residents/residents.php"),
-        array("Certification", "fas fa-print", "/mis/certificates/certificates.php"),
+        array("Certification", "fas fa-print", "/mis/certificates/brgyclearance.php"),
         array("Decision Support System", "fas fa-chart-bar", "/mis/dss/dss.php"),
+        array("Reports", "fas fa-chart-area", "/mis/reports/reports.php"),
       );
 
 

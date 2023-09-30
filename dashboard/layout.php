@@ -191,11 +191,12 @@
                 <?php
                 $menuItems = array(
                     array("Dashboard", "fas fa-th-large", "/mis/dashboard/dashboard.php"),
-                    array("Officials", "fas fa-user-tie", "/mis/officials/officials.php"),
+                    array("Barangay Officials", "fas fa-user-tie", "/mis/officials/officials.php"),
                     array("Household Profiling","fas fa-house-user", "/mis/household/household.php"),
                     array("Resident Profiling", "fas fa-users", "/mis/residents/residents.php"),
                     array("Certification", "fas fa-print", "/mis/certificates/certificates.php"),
                     array("Decision Support System", "fas fa-chart-bar", "/mis/dss/dss.php"),
+                    array("Reports", "fas fa-chart-area", "/mis/reports/reports.php"),
                 );
 
                 foreach ($menuItems as $item) {

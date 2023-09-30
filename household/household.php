@@ -1,6 +1,5 @@
 <?php include 'layout.php'; ?>
 
-
 <!-- insert modal -->
 <div class="modal fade" id="insertdata" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="insertdataLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -15,14 +14,15 @@
           <div class="row">
             <div class="col-sm-6">
               <div class="mb-3">
-                <label class="form-label">Household Number</label>
-                <input type="text" class="form-control" name="houseNum" placeholder="enter household number">
+                <label class="form-label">Household Number:</label>
+                <input type="text" class="form-control" name="houseNum" placeholder="Enter Household Number">
               </div>
             </div>
             <div class="col-sm-6">
               <div class="mb-3">
-                <label class="form-label">Zone</label>
-                <select class="form-select" name="zone" placeholder="enter zone">
+                <label class="form-label">Zone:</label>
+                <select class="form-select" name="zone">
+                  <option selected="" disabled="">-----Select-----</option>
                   <option value="Zone 1">Zone 1</option>
                   <option value="Zone 2">Zone 2</option>
                   <option value="Zone 3">Zone 3</option>
@@ -35,28 +35,29 @@
           <div class="row">
             <div class="col-sm-6">
               <div class="mb-3">
-                <label class="form-label">Total Members</label>
-                <input type="number" class="form-control" name="totalMem" placeholder="enter total members">
+                <label class="form-label">Total Members:</label>
+                <input type="number" class="form-control" name="totalMem" placeholder="Enter Total Members">
               </div>
             </div>
             <div class="col-sm-6">
               <div class="mb-3">
-                <label class="form-label">Head of the Family</label>
-                <input type="text" class="form-control" name="famHead" placeholder="enter head of the family">
+                <label class="form-label">Head of the Family:</label>
+                <input type="text" class="form-control" name="famHead" placeholder="Enter Head of the Family">
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-6">
               <div class="mb-3">
-                <label class="form-label">Household Income</label>
-                <input type="number" class="form-control" name="income" placeholder="enter household income">
+                <label class="form-label">Household Income:</label>
+                <input type="number" class="form-control" name="income" placeholder="Enter Household Income">
               </div>
             </div>
             <div class="col-sm-6">
               <div class="mb-3">
-                <label class="form-label">Sanitary Toilet</label>
-                <select class="form-select" name="sanToilet" placeholder="enter sanitary toilet">
+                <label class="form-label">Sanitary Toilet:</label>
+                <select class="form-select" name="sanToilet">
+                  <option selected="" disabled="">-----Select-----</option>
                   <option value="Water-sealed">Water-sealed</option>
                   <option value="Antipolo">Antipolo</option>
                   <option value="None">None</option>
@@ -67,8 +68,9 @@
           <div class="row">
             <div class="col-sm-6">
               <div class="mb-3">
-                <label class="form-label">Water Usage</label>
-                <select class="form-select" name="water" placeholder="enter water usage">
+                <label class="form-label">Water Usage:</label>
+                <select class="form-select" name="water">
+                  <option selected="" disabled="">-----Select-----</option>
                   <option value="Faucet">Faucet</option>
                   <option value="Deep Well">Deep Well</option>
                 </select>
@@ -76,8 +78,9 @@
             </div>
             <div class="col-sm-6">
               <div class="mb-3">
-                <label class="form-label">House Ownership Status</label>
-                <select class="form-select" name="ownerStatus" placeholder="enter house ownership status">
+                <label class="form-label">House Ownership Status:</label>
+                <select class="form-select" name="ownerStatus">
+                  <option selected="" disabled="">-----Select-----</option>
                   <option value="Owned">Owned</option>
                   <option value="Rent">Rent</option>
                 </select>
@@ -87,8 +90,9 @@
           <div class="row">
             <div class="col-sm-6">
               <div class="mb-3">
-                <label class="form-label">Land Ownership Status</label>
-                <select class="form-select" name="landStatus" placeholder="enter land ownership status">
+                <label class="form-label">Land Ownership Status:</label>
+                <select class="form-select" name="landStatus">
+                  <option selected="" disabled="">-----Select-----</option>
                   <option value="Owned">Owned</option>
                   <option value="Landless">Landless</option>
                   <option value="Tenant">Tenant</option>
@@ -138,21 +142,19 @@
       <form action="code.php" method="POST">
         <div class="modal-body">
 
-          <div class="row">
+          <input type="hidden" class="form-control" id="user_id" name="id">
 
-            <div class="mb-3">
-              <input type="hidden" class="form-control" id='user_id' name="id">
-            </div>
+          <div class="row">
             <div class="col-sm-6">
               <div class="mb-3">
                 <label class="form-label">Household Number</label>
-                <input type="text" class="form-control" id='houseNum' name="houseNum" placeholder="enter household number">
+                <input type="text" class="form-control" name="houseNum" id="houseNum" placeholder="Enter household number">
               </div>
             </div>
             <div class="col-sm-6">
               <div class="mb-3">
                 <label class="form-label">Zone</label>
-                <select class="form-select" id='zone' name="zone" placeholder="enter zone">
+                <select class="form-select" name="zone" id="zone" placeholder="Enter zone">
                   <option value="Zone 1">Zone 1</option>
                   <option value="Zone 2">Zone 2</option>
                   <option value="Zone 3">Zone 3</option>
@@ -161,18 +163,16 @@
                 </select>
               </div>
             </div>
-          </div>
-          <div class="row">
             <div class="col-sm-6">
               <div class="mb-3">
                 <label class="form-label">Total Members</label>
-                <input type="number" class="form-control" id='totalMem' name="totalMem" placeholder="enter total members">
+                <input type="number" class="form-control" name="totalMem" id="totalMem" placeholder="Enter total members">
               </div>
-            </div>
+            </div>        
             <div class="col-sm-6">
               <div class="mb-3">
                 <label class="form-label">Head of the Family</label>
-                <input type="text" class="form-control" id='famHead' name="famHead" placeholder="enter head of the family">
+                <input type="text" class="form-control" name="famHead" id="famHead" placeholder="Enter head of the family">
               </div>
             </div>
           </div>
@@ -180,25 +180,23 @@
             <div class="col-sm-6">
               <div class="mb-3">
                 <label class="form-label">Household Income</label>
-                <input type="number" class="form-control" id='income' name="income" placeholder="enter household income">
+                <input type="text" class="form-control" name="income" id="income" placeholder="Enter household income">
               </div>
             </div>
             <div class="col-sm-6">
               <div class="mb-3">
                 <label class="form-label">Sanitary Toilet</label>
-                <select class="form-select" id='sanToilet' name="sanToilet" placeholder="enter sanitary toilet">
+                <select class="form-select" name="sanToilet" id="sanToilet" placeholder="Enter sanitary toilet">
                   <option value="Water-sealed">Water-sealed</option>
                   <option value="Antipolo">Antipolo</option>
                   <option value="None">None</option>
                 </select>
               </div>
             </div>
-          </div>
-          <div class="row">
             <div class="col-sm-6">
               <div class="mb-3">
                 <label class="form-label">Water Usage</label>
-                <select class="form-select" id='water' name="water" placeholder="enter water usage">
+                <select class="form-select" name="water" id="water" placeholder="Enter water usage">
                   <option value="Faucet">Faucet</option>
                   <option value="Deep Well">Deep Well</option>
                 </select>
@@ -207,18 +205,16 @@
             <div class="col-sm-6">
               <div class="mb-3">
                 <label class="form-label">House Ownership Status</label>
-                <select class="form-select" id='ownerStatus' name="ownerStatus" placeholder="enter house ownership status">
+                <select class="form-select" name="ownerStatus" id="ownerStatus" placeholder="Enter house ownership status">
                   <option value="Owned">Owned</option>
                   <option value="Rent">Rent</option>
                 </select>
               </div>
             </div>
-          </div>
-          <div class="row">
             <div class="col-sm-6">
               <div class="mb-3">
                 <label class="form-label">Land Ownership Status</label>
-                <select class="form-select" id='landStatus' name="landStatus" placeholder="enter land ownership status">
+                <select class="form-select" name="landStatus" id="landStatus" placeholder="Enter land ownership status">
                   <option value="Owned">Owned</option>
                   <option value="Landless">Landless</option>
                   <option value="Tenant">Tenant</option>
@@ -274,7 +270,8 @@
                       <th style="width: 50px !important;">Zone</th>
                       <th style="width: 100px !important;">Total Members</th>
                       <th style="width: 130px !important;">Head of the Family</th>
-                      <th style="width: 110px !important;">Action</th>                    </tr>
+                      <th style="width: 110px !important;">Action</th>                    
+                    </tr>
                   </thead>
                   <tbody>
                     <?php
@@ -363,7 +360,8 @@
       e.preventDefault();
 
       var user_id = $(this).closest('tr').find('.user_id').text();
-      /*console.log(user_id);*/
+
+      /* console.log(user_id); */
 
       $.ajax({
         method: "POST",
@@ -374,27 +372,26 @@
 
         },
         success: function(response) {
-          /*console.log(response);*/
+          /* console.log(response); */
 
-          $.each(response, function(Key, value) {
+        $.each(response, function (Key, value) { 
+         /* console.log(value['houseNum']); */
 
-            /*console.log(value['houseNum'])*/
-
-            $('#user_id').val(value['id']);
-            $('#houseNum').val(value['houseNum']);
-            $('#zone').val(value['zone']);
-            $('#totalMem').val(value['totalMem']);
-            $('#famHead').val(value['famHead']);
-            $('#income').val(value['income']);
-            $('#sanToilet').val(value['sanToilet']);
-            $('#water').val(value['water']);
-            $('#ownerStatus').val(value['ownerStatus']);
-            $('#landStatus').val(value['landStatus']);
-          });
-
+         $('#user_id').val(value['id']);
+         $('#houseNum').val(value['houseNum']);
+         $('#zone').val(value['zone']);
+         $('#totalMem').val(value['totalMem']);
+         $('#famHead').val(value['famHead']);
+         $('#income').val(value['income']);
+         $('#sanToilet').val(value['sanToilet']);
+         $('#water').val(value['water']);
+         $('#ownerStatus').val(value['ownerStatus']);
+         $('#landStatus').val(value['landStatus']);
+   
+        });
           $('#editdata').modal('show');
         }
-      });
+      })
 
     });
   });

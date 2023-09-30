@@ -92,10 +92,10 @@
     }
 
     #myTable_wrapper {
-      padding: 1px;
+      padding: 5px;
     }
 
-    #myTable_filter input[type="search"] {
+    #myTable_filter input[placeholder="search"] {
       width: 100%; 
       padding: 5px;
       border: 1px solid #ccc;
@@ -118,13 +118,68 @@
 
     #myTable tbody td {
       font-size: 14px;
-      padding: 5px; 
+      padding: 7px; 
     }
 
     #myTable {
       width: 95%; 
     }
+
+    .modal-content {
+      padding: 20px;
+    }
+
+    .modal-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .control-label {
+      font-weight: bold;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .modal-footer button[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .modal-footer button[type="button"] {
+      background-color: #ccc;
+    }
+
+    select.form-control {
+      height: 34px;
+      padding: 6px 12px;
+    }
+
+    input.form-control {
+      height: 34px;
+      padding: 6px 12px;
+    }
+
+    input[type="hidden"] {
+      display: none;
+    }
+
+    input[type="date"] {
+      height: 34px;
+      padding: 6px 12px;
+    }
+
+    .modal-body {
+      padding: 10px;
+    }
+
+    .modal-footer {
+      padding: 15px 20px;
+      text-align: center;
+    }
   </style>
+
   <nav class="navbar navbar-expand-lg custom-navbar">
     <div class="container-fluid">
       <a class="navbar-brand">Puntian, Sumilao</a>
@@ -133,6 +188,7 @@
       </div>
     </div>
   </nav>
+  
   <div class="sidebar">
     <ul>
       <?php
@@ -142,7 +198,7 @@
         array("Barangay Officials", "fas fa-user-tie", "/mis/officials/officials.php"),
         array("Household Profiling", "fas fa-house-user", "/mis/household/household.php"),
         array("Resident Profiling", "fas fa-users", "/mis/residents/residents.php"),
-        array("Certification", "fas fa-print", "/mis/certificates/certificates.php"),
+        array("Certification", "fas fa-print", "/mis/certificates/brgyclearance.php"),
         array("Decision Support System", "fas fa-chart-bar", "/mis/dss/dss.php"),
         array("Reports", "fas fa-chart-area", "/mis/reports/reports.php"),
       );

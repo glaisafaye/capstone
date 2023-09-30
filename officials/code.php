@@ -5,13 +5,12 @@ $connection = mysqli_connect("localhost", "root", "", "mis");
 if (isset($_POST['save_data'])) {
 
   $id = $_POST["id"];
-  $position = $_POST["position"];
-  $name = $_POST["name"];
-  $contactNum = $_POST["contactNum"];
-  $start = $_POST["start"];
-  $end = $_POST["end"];
+  $position = $_POST['position'];
+  $name = $_POST['name'];
+  $contactNum = $_POST['contactNum'];
+  $status = $_POST['status'];
 
-  $insert_query = "INSERT INTO officials (`position`, `name`, `contactNum`, `start`, `end`) VALUES ('$position', '$name', '$contactNum', '$start', '$end')";
+  $insert_query = "INSERT INTO officials (`position`, `name`, `contactNum`, `status`) VALUES ('$position', '$name', '$contactNum', '$status')";
   $insert_query_run = mysqli_query($connection, $insert_query);
 
   if ($insert_query_run) {
@@ -39,8 +38,7 @@ if (isset($_POST['click_view_btn'])) {
       <h6>Position: ' .$row['position']. '</h6>
       <h6>Full Name: ' .$row['name']. '</h6>
       <h6>Contact Number: ' .$row['contactNum']. '</h6>
-      <h6>Start Term: ' .$row['start']. '</h6>
-      <h6>End Term: ' .$row['end']. '</h6>
+      <h6>Status: ' .$row['status']. '</h6>
       ';
     }
   } 
@@ -50,8 +48,9 @@ if (isset($_POST['click_view_btn'])) {
   }
 }
 
-/*edit data */
+/* edit data */
 if (isset($_POST['click_edit_btn'])) {
+
   $id = $_POST['user_id'];
   $arrayresult = [];
 
@@ -62,9 +61,9 @@ if (isset($_POST['click_edit_btn'])) {
   if (mysqli_num_rows($fetch_query_run) > 0) {
     while ($row = mysqli_fetch_array($fetch_query_run)) {
 
-     array_push($arrayresult, $row);
-     header('content-type: application/json');
-     echo json_encode($arrayresult);
+      array_push($arrayresult, $row);
+      header('content-type: application/json');
+      echo json_encode($arrayresult);
     }
   } 
   else 
@@ -75,24 +74,20 @@ if (isset($_POST['click_edit_btn'])) {
 
 /* update data */
 if (isset($_POST['update_data'])) {
-  $id = $_POST["id"];
-  $position = $_POST["position"];
-  $name = $_POST["name"];
-  $contactNum = $_POST["contactNum"];
-  $start = $_POST["start"];
-  $end = $_POST["end"];
+  $id = $_POST['id'];
+  $position = $_POST['position'];
+  $name = $_POST['name'];
+  $contactNum = $_POST['contactNum'];
 
+  $update_query = "UPDATE officials SET position='$position', name='$name', contactNum='$contactNum' WHERE id='$id'";
+  $update_query_run = mysqli_query($connection, $update_query);
 
-  $update_query = "UPDATE officials SET position='$position', name='$name', contactNum='$contactNum', start='$start', end='$end' WHERE id ='id'";
-  if($update_query_run)
-  {
+  if($update_query_run) {
     $_SESSION['status'] = "Data updated successfully";
     header('location: officials.php');
-  }
-  else{
-    $_SESSION['status'] = "Data not updated successfully";
+  } else {
+    $_SESSION['status'] = "Data not updated";
     header('location: officials.php');
   }
 }
-
 ?>

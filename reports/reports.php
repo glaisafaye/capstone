@@ -1,8 +1,8 @@
 <?php include 'layout.php' ?>
 <div class="main">
         <div class="btn-group">
-            <a class="btn btn-primary" href="/mis/reports/reports.php" role="button">Certificate Report</a>
-            <a class="btn btn-primary" href="/mis/reports/reports1.php" role="button">Assistance</a>
+            <a class="btn btn-secondary btn-sm" href="/mis/reports/reports.php" role="button">Certificate Report</a>
+            <a class="btn btn-secondary btn-sm" href="/mis/reports/reports1.php" role="button">Assistance</a>
         </div>
 
         <div id="certificateReport">
@@ -20,7 +20,6 @@
                     die("Connection Failed: " . $connection->connect_error);
                 }
 
-                // SQL query to count certificates issued by month and year for clearance1 table
                 $sql1 = "SELECT YEAR(issue_date) AS year, MONTH(issue_date) AS month, COUNT(*) AS count
                         FROM clearance1
                         GROUP BY YEAR(issue_date), MONTH(issue_date)
