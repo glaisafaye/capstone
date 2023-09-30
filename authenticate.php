@@ -24,6 +24,5 @@ if ($result->num_rows == 1) {
     echo "Invalid username or password.";
 }
 
-// Close the database connection
 $conn->close();
 ?>
