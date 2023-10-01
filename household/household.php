@@ -240,20 +240,20 @@
     <div class="col-md-10">
 
       <?php
-      if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+        if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+        ?>
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Hey!</strong> <?php echo $_SESSION['status']; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <?php
+          unset($_SESSION['status']);
+        }
       ?>
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-          <strong>Hey!</strong> <?php echo $_SESSION['status']; ?>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-      <?php
-        unset($_SESSION['status']);
-      }
-      ?>
-      <div class="container my-20">
+
+      <div class="container my-19">
         <div class="d-flex justify-content-center mb-3">
           <div class="col-md-10">
-
             <div class="card">
               <div class="card-header">
                 <h4 class="text-center"></h4>
@@ -274,17 +274,16 @@
                     </tr>
                   </thead>
                   <tbody>
+
                     <?php
+                      $connection = mysqli_connect("localhost", "root", "", "mis");
 
-                    $connection = mysqli_connect("localhost", "root", "", "mis");
+                      $fetch_query = "SELECT * FROM household";
+                      $fetch_query_run = mysqli_query($connection, $fetch_query);
 
-                    $fetch_query = "SELECT * FROM household";
-                    $fetch_query_run = mysqli_query($connection, $fetch_query);
-
-                    if (mysqli_num_rows($fetch_query_run) > 0) {
-                      while ($row = mysqli_fetch_array($fetch_query_run)) {
-                        /*echo $row['id']; */
-
+                      if (mysqli_num_rows($fetch_query_run) > 0) {
+                        while ($row = mysqli_fetch_array($fetch_query_run)) {
+                          /*echo $row['id']; */
                     ?>
                         <tr>
                           <td class="user_id"><?php echo $row['id']; ?></td>
@@ -298,16 +297,17 @@
                             <a href="#" class="btn btn-danger btn-sm delete_btn">Delete</a>
                           </td>
                         </tr>
+
                       <?php
-                      }
-                    } else {
+                        }
+                        } else {
                       ?>
+
                       <tr colspan="4">No Record Found</tr>
-                    <?php
-                    }
 
-                    ?>
-
+                      <?php
+                        }
+                      ?>
 
                   </tbody>
                 </table>

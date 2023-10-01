@@ -189,7 +189,7 @@
               </div>
               <div class="form-group mb-3">
                 <label class="control-label">Contact Number:</label>
-                <input name="contactNum" class="form-control input-sm input-size" id="contactNum" type="number" placeholder="Contact Number" />
+                <input name="contactNum" class="form-control input-sm" id="contactNum" type="text" placeholder="Contact Number" />
               </div>
               <div class="form-group mb-3">
                 <label class="control-label">Gender:</label>
@@ -215,7 +215,7 @@
               </div>
               <div class="form-group mb-3">
                 <label class="control-label">Household Number:</label>
-                <input name="houseNum" class="form-control input-sm input-size" id="houseNum" type="number" min="1" placeholder="Household Number" />
+                <input name="houseNum" class="form-control input-sm" type="text" id="houseNum" placeholder="Household Number" />
               </div>
               <div class="form-group mb-3">
                 <label class="control-label">Differently-abled Person:</label>
@@ -313,7 +313,7 @@
         unset($_SESSION['status']);
       }
       ?>
-      <div class="container my-18">
+      <div class="container my-20">
         <div class="d-flex justify-content-center mb-3">
           <div class="col-md-10">
 
@@ -334,7 +334,7 @@
                       <th style="width: 130px !important;">First Name</th>
                       <th scope="col">Gender</th>
                       <th scope="col">Zone</th>
-                      <th style="width: 130px !important;">Action</th>                    </tr>
+                      <th style="width: 150px !important;">Action</th>                    </tr>
                   </thead>
                   <tbody>
                     <?php

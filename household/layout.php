@@ -178,8 +178,20 @@
       padding: 15px 20px;
       text-align: center;
     }
-  </style>
+    
+    .content {
+      margin-left: 260px; 
+      transition: margin 0.3s;
+      padding: 15px;
+    }
 
+    .fixed-sidebar .sidebar {
+      position: fixed;
+    }
+  </style>
+</head>
+
+<body>
   <nav class="navbar navbar-expand-lg custom-navbar">
     <div class="container-fluid">
       <a class="navbar-brand">Puntian, Sumilao</a>
@@ -188,34 +200,35 @@
       </div>
     </div>
   </nav>
-  
-  <div class="sidebar">
-    <ul>
-      <?php
 
-      $menuItems = array(
-        array("Dashboard", "fas fa-th-large", "/mis/dashboard/dashboard.php"),
-        array("Barangay Officials", "fas fa-user-tie", "/mis/officials/officials.php"),
-        array("Household Profiling", "fas fa-house-user", "/mis/household/household.php"),
-        array("Resident Profiling", "fas fa-users", "/mis/residents/residents.php"),
-        array("Certification", "fas fa-print", "/mis/certificates/brgyclearance.php"),
-        array("Decision Support System", "fas fa-chart-bar", "/mis/dss/dss.php"),
-        array("Reports", "fas fa-chart-area", "/mis/reports/reports.php"),
-      );
+  <div class="container-fluid">
+    <div class="row">
+      <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+        <ul class="nav flex-column">
+          <?php
+            $menuItems = array(
+              array("Dashboard", "fas fa-th-large", "/mis/dashboard/dashboard.php"),
+              array("Barangay Officials", "fas fa-user-tie", "/mis/officials/officials.php"),
+              array("Household Profiling", "fas fa-house-user", "/mis/household/household.php"),
+              array("Resident Profiling", "fas fa-users", "/mis/residents/residents.php"),
+              array("Certification", "fas fa-print", "/mis/certificates/brgyclearance.php"),
+              array("Decision Support System", "fas fa-chart-bar", "/mis/dss/dss.php"),
+              array("Reports", "fas fa-chart-area", "/mis/reports/reports.php"),
+            );
 
-
-      foreach ($menuItems as $item) {
-        echo '<li>';
-        echo '<a href="' . $item[2] . '">';
-        echo '<i class="' . $item[1] . '"></i>';
-        echo '<div>' . $item[0] . '</div>';
-        echo '</a>';
-        echo '</li>';
-      }
-      ?>
-    </ul>
+            foreach ($menuItems as $item) {
+              echo '<li class="nav-item">';
+              echo '<a class="nav-link" href="' . $item[2] . '">';
+              echo '<i class="' . $item[1] . '"></i>';
+              echo '<span>' . $item[0] . '</span>';
+              echo '</a>';
+              echo '</li>';
+            }
+          ?>
+        </ul>
+      </nav>
+    </div>
   </div>
 
-  </body>
-
+</body>
 </html>
