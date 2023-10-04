@@ -19,7 +19,6 @@
     }
 
     .sidebar {
-      position: fixed;
       top: 60px;
       width: 260px;
       height: calc(100% - 60px);
@@ -127,6 +126,8 @@
 
     .modal-content {
       padding: 20px;
+      max-width: 600px;
+      margin: 0 auto;
     }
 
     .modal-title {
@@ -185,9 +186,6 @@
       padding: 15px;
     }
 
-    .fixed-sidebar .sidebar {
-      position: fixed;
-    }
   </style>
 </head>
 
@@ -214,6 +212,8 @@
               array("Certification", "fas fa-print", "/mis/certificates/brgyclearance.php"),
               array("Decision Support System", "fas fa-chart-bar", "/mis/dss/dss.php"),
               array("Reports", "fas fa-chart-area", "/mis/reports/reports.php"),
+              array("About", "fa-solid fa-question", "/mis/about/about.php"),
+              array("Backup", "fa-solid fa-download", "/mis/backup.php"),
             );
 
             foreach ($menuItems as $item) {
