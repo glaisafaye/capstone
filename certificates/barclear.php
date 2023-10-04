@@ -350,31 +350,32 @@
                     <h2>TO WHOM IT MAY CONCERN:</h2>
                 </div>
                 <div class="first">
-                    <p>THIS IS TO CERTIFY THAT <?= $residentName ?> a bonafide resident of Puntian, Sumilao, Bukidnon whose, signature/thumbmarks and other relevant information appeared hereunder is a person of good moral character and has no civil/criminal/miscellaneous case/s, involvement to any crime punishable by law, nor has any pending legal charges filed against him/her as per record of the barangay on the date of the issuance.</p>
+                    <p>THIS IS TO CERTIFY THAT <span style="color: red; font-size: 18pt; text-decoration: underline;"><?= $residentName ?></span> a bonafide resident of Puntian, Sumilao, Bukidnon whose, signature/thumbmarks and other relevant information appeared hereunder is a person of good moral character and has no civil/criminal/miscellaneous case/s, involvement to any crime punishable by law, nor has any pending legal charges filed against him/her as per record of the barangay on the date of the issuance.</p>
                 </div>
                 <div class="birth">
-                    <h2>Date of Birth	: <?= $dateOfBirth ?></h2>
+                <h2><span>Date of Birth :</span> <span style="color: red; font-size: 16pt; text-decoration: underline;"><?= $dateOfBirth ?></span></h2>
                 </div>
                 <div class="birth">
-                    <h2>Age		: <?= $age ?></h2>
+                <h2><span>Age :</span> <span style="color: red; font-size: 16pt; text-decoration: underline;"><?= $age ?></span></h2>
                 </div>
                 <div class="birth">
-                    <h2>Place of Birth	: Puntian Sumilao Bukidnon</h2>
+                <h2><span>Place of Birth :</span> <span style="color: red; font-size: 16pt; text-decoration: underline;">Puntian Sumilao Bukidnon</span></h2>
                 </div>
                 <div class="birth">
-                    <h2>Gender		: <?= $gender ?></h2>
+                <h2><span>Gender :</span> <span style="color: red; font-size: 16pt; text-decoration: underline;"><?= $gender ?></span></h2>
                 </div>
                 <div class="birth">
-                    <h2>Civil Status	: <?= $civilStatus ?></h2>
+                <h2><span>Civil Status :</span> <span style="color: red; font-size: 16pt; text-decoration: underline;"><?= $civilStatus ?></span></h2>
                 </div>
                 <div class="signatures1">
                     Signature<br><br>
                  </div>
                  <div class="purpose">
-                    PURPOSE      : <?= $purpose ?><br><br>
+                    PURPOSE      : <span style="color: red; font-size: 16pt;text-decoration: underline;"><?= $purpose ?></span><br><br>
                  </div>
-                 <div class="date">
-                    <h2>Issued this   18th     day of July , 2023  at Puntian, Sumilao, Bukidnon, Philippines.</h2>
+                 <div class="first">
+                 <p>Issued this <strong class="date" style="font-size: 18pt; color: red;"><?php echo date("jS \\d\\a\\y \\of F, Y"); ?></strong> at Puntian, Sumilao, Bukidnon, Philippines.<br>
+
                 </div>
                 <div class="signature">
                     HON. TIRSO B. AMISTOSO<br>

@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
             labels: ['Total Population'],
             datasets: [
               {
-                label: 'Population as of 2020',
+                label: 'Population as of 2023',
                 data: [data.totalPopulation], // Use the total population value
                 backgroundColor: 'rgba(41, 155, 191)',
                 borderColor: 'rgba(41, 155, 191)',

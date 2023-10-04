@@ -5,7 +5,7 @@ include('db_connection.php');
 $residentID = $_GET['resident_id']; 
 
 $query = "SELECT r.fname, r.lname, c.clearanceNO, c.purpose FROM residents r
-          JOIN clearance c ON r.id = c.residentid
+          JOIN brgyindigency c ON r.id = c.residentid
           WHERE c.id = $residentID"; 
 
 $result = $connection->query($query);

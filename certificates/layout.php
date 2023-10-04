@@ -208,6 +208,8 @@
               array("Certification", "fas fa-print", "/mis/certificates/brgyclearance.php"),
               array("Decision Support System", "fas fa-chart-bar", "/mis/dss/dss.php"),
               array("Reports", "fas fa-chart-area", "/mis/reports/reports.php"),
+              array("About", "fa-solid fa-question", "/mis/about/about.php"),
+              array("Backup", "fa-solid fa-download", "/mis/backup.php"),
             );
 
             foreach ($menuItems as $item) {

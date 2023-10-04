@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errorMessage = "All fields are required";
     } else {
 
-        $sql = "INSERT INTO clearance (`clearanceNO`, `residentid`, `purpose`, `orNo`) VALUES ('$clearanceNo', '$residentid', '$purpose', '$orNo')";
+        $sql = "INSERT INTO brgyindigency (`clearanceNO`, `residentid`, `purpose`, `orNo`) VALUES ('$clearanceNo', '$residentid', '$purpose', '$orNo')";
         $result = $connection->query($sql);
 
         if (!$result) {
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $successMessage = "Certificate added correctly";
 
-            header("location: /mis/certificates/certificates.php");
+            header("location: /mis/certificates/brgyindigency.php");
             exit;
         }
     }
@@ -112,10 +112,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="card-header">
                                     <div class="btn-group">
                                         <a class="btn btn-outline-info" href="/mis/certificates/brgyclearance.php" role="button">Barangay Clearance</a>
-                                    </div>
                                         <a class="btn btn-outline-info" href="/mis/certificates/brgyindigency.php" role="button">Barangay Indigency</a>
+                                        <a class="btn btn-outline-info" href="/mis/certificates/busclearance.php" role="button">Business Clearance</a>
                                     </div>
-                                    <div>
                                     <br>
                                     <div class="d-flex justify-content-center">
                                         <button type="button" class="btn btn-outline-secondary" id="showModal">Add Certificate</button>
@@ -147,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                     die("Connection Failed: " . $connection->connect_error);
                                                 }
 
-                                                $sql = "SELECT c.clearanceNO, r.lname, r.fname, c.purpose, c.orNo, c.id FROM clearance c
+                                                $sql = "SELECT c.clearanceNO, r.lname, r.fname, c.purpose, c.orNo, c.id FROM brgyindigency c
                                                 JOIN residents r ON c.residentid = r.id";
                                                 $result = $connection->query($sql);
 

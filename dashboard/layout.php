@@ -5,7 +5,9 @@
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+        crossorigin="anonymous" />
     <title>Puntian Management Information System</title>
 
     <style>
@@ -168,6 +170,13 @@
             box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
             margin-bottom: 20px;
         }
+
+        .logout {
+            color: #299b63;
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 20px;
+        }
 </style>
 </head>
 
@@ -175,17 +184,17 @@
 <div class="container">
         <div class="topbar">
             <div class="logo">
-                <h2>Puntian Sumilao</h2>
+                <h2>Puntian, Sumilao</h2>
             </div>
-            <div class="search">
-                <input type="text" id="search" placeholder="search here">
-                <label for="search"> <i class="fas fa-search"></i></label>
-            </div>
-            <i class="fas fa-bell"></i>
             <div class="user">
                 <img src="/mis/dashboard/logo.jpg" alt="">
             </div>
+            <div class="links">
+                <a href="logout.php" class="logout">Logout</a>
+            </div>
         </div>
+    </div>
+
         <div class="sidebar">
             <ul>
                 <?php
@@ -194,9 +203,11 @@
                     array("Barangay Officials", "fas fa-user-tie", "/mis/officials/officials.php"),
                     array("Household Profiling","fas fa-house-user", "/mis/household/household.php"),
                     array("Resident Profiling", "fas fa-users", "/mis/residents/residents.php"),
-                    array("Certification", "fas fa-print", "/mis/certificates/certificates.php"),
+                    array("Certification", "fas fa-print", "/mis/certificates/brgyclearance.php"),
                     array("Decision Support System", "fas fa-chart-bar", "/mis/dss/dss.php"),
                     array("Reports", "fas fa-chart-area", "/mis/reports/reports.php"),
+                    array("About", "fa-solid fa-question", "/mis/about/about.php"),
+                    array("Backup", "fa-solid fa-download", "/mis/backup.php"),
                 );
 
                 foreach ($menuItems as $item) {
@@ -211,6 +222,7 @@
             </ul>
         </div>
     </div>
+
 </body>
 
 </html>

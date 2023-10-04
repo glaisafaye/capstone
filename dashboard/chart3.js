@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
             labels: data.labels,
             datasets: [
               {
-                label: 'Civil Status as of 2020',
+                label: 'Civil Status as of 2023',
                 data: data.values,
                 backgroundColor: 'rgba(41, 155, 191)',  // Corrected color format
                 borderColor: 'rgba(41, 155, 191)',      // Corrected color format

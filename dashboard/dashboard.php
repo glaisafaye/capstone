@@ -22,7 +22,7 @@
         $cardsData = array(
             array("SELECT COUNT(*) FROM household", "Total Household", "fas fa-house-user"),
             array("SELECT COUNT(*) FROM residents", "Total Residents", "fas fa-users"),
-            array("SELECT COUNT(*) FROM clearance", "Total Clearance", "fas fa-print")
+            array("SELECT COUNT(*) FROM brgyclearance", "Total Clearance", "fas fa-print")
         );
 
         foreach ($cardsData as $card) {

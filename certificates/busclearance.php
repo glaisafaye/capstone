@@ -8,9 +8,12 @@ $database = "mis";
 $connection = new mysqli($servername, $username, $password, $database);
 
 $clearanceNo = "";
-$residentid = "";
-$purpose = "";
+$ddl_resident = "";
+$types = "";
 $orNo = "";
+$amount = "";
+$description = "";
+$validDate = "";
 
 $errorMessage = "";
 $successMessage = "";
@@ -21,33 +24,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $clearanceNo = $_POST["clearanceNO"];
     }
     if (isset($_POST["ddl_resident"])) {
-        $residentid = $_POST["ddl_resident"];
+      $residentid = $_POST["ddl_resident"];
     }
-    if (isset($_POST["purpose"])) {
-        $purpose = $_POST["purpose"];
+    if (isset($_POST["types"])) {
+      $types = $_POST["types"];
     }
     if (isset($_POST["orNo"])) {
         $orNo = $_POST["orNo"];
     }
+    if (isset($_POST["amount"])) {
+        $amount = $_POST["amount"];
+    }
+    if (isset($_POST["description"])) {
+        $description = $_POST["description"];
+    }
+    if (isset($_POST["validDate"])) {
+        $validDate = $_POST["validDate"];
+    }
+    
 
-    if (empty($clearanceNo) || empty($residentid) || empty($purpose) || empty($orNo)) {
+    if (empty($clearanceNo) || empty($residentid) || empty($types) || empty($orNo) || empty($amount) || empty($description) || empty($validDate)) {
         $errorMessage = "All fields are required";
     } else {
 
-        $sql = "INSERT INTO brgyclearance (`clearanceNO`, `residentid`, `purpose`, `orNo`) VALUES ('$clearanceNo', '$residentid', '$purpose', '$orNo')";
+        $sql = "INSERT INTO busclearance (`clearanceNO`, `residentid`, `types`, `orNo`, `amount`, `description`, `validDate`) VALUES ('$clearanceNo', '$residentid', '$types', '$orNo', '$amount', '$description', '$validDate')";
         $result = $connection->query($sql);
 
         if (!$result) {
             $errorMessage = "Invalid query" . $connection->error;
         } else {
             $clearanceNo = "";
-            $residentid = "";
-            $purpose = "";
+            $ddl_resident = "";
+            $type = "";
             $orNo = "";
+            $amount = "";
+            $description = "";
+            $validDate = "";
 
             $successMessage = "Certificate added correctly";
 
-            header("location: /mis/certificates/brgyclearance.php");
+            header("location: /mis/certificates/busclearance.php");
             exit;
         }
     }
@@ -85,14 +101,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </select>
                 </div>
                 <div class="row">
-                    <input type="text" class="form-control" id="purpose" name="purpose" placeholder="Purpose" value="<?php echo $purpose; ?>">
+                    <input type="text" class="form-control" id="types" name="types" placeholder="Type of Business Clearance" value="<?php echo $types; ?>">
                 </div>
                 <div class="row">
-                    <input type="text" class="form-control" id="orNo" name="orNo" placeholder="OR Number" <?php echo $orNo; ?>">
+                    <input type="text" class="form-control" id="orNo" name="orNo" placeholder="OR Number" value="<?php echo $orNo; ?>">
+                </div>
+                <div class="row">
+                    <input type="number" class="form-control" id="amount" name="amount" placeholder="Amount Paid" value="<?php echo $amount; ?>">
+                </div>
+                <div class="row">
+                    <input type="text" class="form-control" id="description" name="description" placeholder="Description" value="<?php echo $description; ?>">
+                </div>
+                <div class="row">
+                  <label class="control-label">Validity Date:</label>
+                  <input name="validDate" class="form-control input-sm input-size" type="date" />
                 </div>
 
                 <div class="btn-container">
-                    <a class="btn btn-outline-primary" href="/mis/certificates/brgyclearance.php" role="button">Cancel</a>
+                    <a class="btn btn-outline-primary" href="/mis/certificates/busclearance.php" role="button">Cancel</a>
                     <button type="submit" class="btn btn-primary" id="submitDocumentRequest">Submit Request</button>
                 </div>
 
@@ -114,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <a class="btn btn-outline-info" href="/mis/certificates/brgyindigency.php" role="button">Barangay Indigency</a>
                                         <a class="btn btn-outline-info" href="/mis/certificates/busclearance.php" role="button">Business Clearance</a>
                                     </div>
-
+                                  
                                     <br>
                                     <div class="d-flex justify-content-center">
                                         <button type="button" class="btn btn-outline-secondary" id="showModal">Add Certificate</button>
@@ -127,8 +153,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                 <tr>
                                                     <th>Clearance #</th>
                                                     <th>Resident Name</th>
-                                                    <th>Purpose</th>
+                                                    <th>Type</th>
                                                     <th>OR Number</th>
+                                                    <th>Amount Paid</th>
+                                                    <th>Business Description</th>
+                                                    <th>Validity Date</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -148,8 +177,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                 }
 
                                                 // Read all rows from database table
-                                                $sql = "SELECT c.clearanceNO, r.lname, r.fname, c.purpose, c.orNo, c.id FROM brgyclearance c
-                                                    JOIN residents r ON c.residentid = r.id";
+                                                $sql = "SELECT c.clearanceNO, r.lname, r.fname, c.types, c.orNo, c.amount, c.description, c.validDate, c.id FROM busclearance c
+                                                JOIN residents r ON c.residentid = r.id";
+                                            
                                                 $result = $connection->query($sql); // Execute the query and store the result
 
                                                 if (!$result) {
@@ -163,10 +193,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                             <tr>
                                                                 <td>{$row['clearanceNO']}</td>
                                                                 <td>{$residentName}</td>
-                                                                <td>{$row['purpose']}</td>
+                                                                <td>{$types}</td>
                                                                 <td>{$row['orNo']}</td>
+                                                                <td>{$row['amount']}</td>
+                                                                <td>{$row['description']}</td>
+                                                                <td>{$row['validDate']}</td>
                                                                 <td>
-                                                                    <a class='btn btn-primary btn-sm' href='/mis/certificates/generate_clearance.php?resident_id={$row['id']}'>Generate</a>
+                                                                    <a class='btn btn-primary btn-sm' href='/mis/certificates/generate_business.php?resident_id={$row['id']}'>Generate</a>
                                                                 </td>
                                                             </tr>
                                                             ";
@@ -186,16 +219,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.getElementById("showModal").addEventListener("click", function() {
-            var firstModal = document.getElementById("pop-up-modal");
-            firstModal.style.display = "block";
+        document.addEventListener("DOMContentLoaded", function() {
+    // Your code here, including the event listener
+    document.getElementById("showModal").addEventListener("click", function() {
+        var firstModal = document.getElementById("pop-up-modal");
+        firstModal.style.display = "block";
         });
+    });
 
+    document.getElementById("close-modal").addEventListener("click", function() {
+    var firstModal = document.getElementById("pop-up-modal");
+    firstModal.style.display = "none";
+});
 
-        document.getElementById("close-modal").addEventListener("click", function() {
-            var firstModal = document.getElementById("pop-up-modal");
-            firstModal.style.display = "none";
-        });
     </script>
 
 </body>

@@ -21,7 +21,7 @@
                 }
 
                 $sql1 = "SELECT YEAR(issue_date) AS year, MONTH(issue_date) AS month, COUNT(*) AS count
-                        FROM clearance1
+                        FROM brgyindigency
                         GROUP BY YEAR(issue_date), MONTH(issue_date)
                         ORDER BY year, month";
 
@@ -29,11 +29,17 @@
 
                 // SQL query to count certificates issued by month and year for clearance table
                 $sql2 = "SELECT YEAR(issue_date) AS year, MONTH(issue_date) AS month, COUNT(*) AS count
-                        FROM clearance
+                        FROM brgyclearance
                         GROUP BY YEAR(issue_date), MONTH(issue_date)
                         ORDER BY year, month";
 
+                $sql3 = "SELECT YEAR(issue_date) AS year, MONTH(issue_date) AS month, COUNT(*) AS count
+                FROM busclearance
+                GROUP BY YEAR(issue_date), MONTH(issue_date)
+                ORDER BY year, month";
+
                 $result2 = $connection->query($sql2);
+                $result3 = $connection->query($sql3);
 
                 // Fetch data from $result1 into an array
                 $data1 = array();
@@ -47,6 +53,11 @@
                     $data2[] = $row2;
                 }
 
+                $data3 = array();
+                while ($row3 = $result3->fetch_assoc()) {
+                    $data3[] = $row3;
+                }
+
                 // Close the database connection
                 $connection->close();
 
@@ -58,13 +69,13 @@
                 $csvData .= "-o0o-,,,\n";
                 $csvData .= "OFFICE OF THE PUNONG BARANGAY,,,\n\n";
                 
-                $csvData .= "Year,Month,Total Barangay Clearance,Total Barangay Indigency,Total Certificates Issued\n";
+                $csvData .= "Year,Month,Total Barangay Indigency,Total Barangay Clearance, Total Business Clearance, Total Certificates Issued\n";
                 foreach ($data1 as $row1) {
                     $year = $row1['year'];
                     $month = date("F", mktime(0, 0, 0, $row1['month'], 1));
                     $count1 = $row1['count'];
                 
-                    // Find the count from the $data2 array for the same month and year
+
                     $count2 = 0;
                     foreach ($data2 as $row2) {
                         if ($row2['year'] == $year && $row2['month'] == $row1['month']) {
@@ -72,8 +83,16 @@
                             break;
                         }
                     }
+
+                    $count3 = 0;
+                    foreach ($data3 as $row3) {
+                        if ($row3['year'] == $year && $row3['month'] == $row1['month']) {
+                            $count3 = $row3['count'];
+                            break;
+                        }
+                    }
                 
-                    $csvData .= "$year,$month,$count1,$count2," . ($count1 + $count2) . "\n";
+                    $csvData .= "$year,$month,$count1,$count2,$count3," . ($count1 + $count2 + $count3) . "\n";
                 }
                 ?>
 
@@ -84,8 +103,9 @@
                     <tr>
                         <th style="padding: 10px; background-color: #299b63; color: #fff;">Year</th>
                         <th style="padding: 10px; background-color: #299b63; color: #fff;">Month</th>
-                        <th style="padding: 10px; background-color: #299b63; color: #fff;">Total Barangay Clearance</th>
                         <th style="padding: 10px; background-color: #299b63; color: #fff;">Total Barangay Indigency</th>
+                        <th style="padding: 10px; background-color: #299b63; color: #fff;">Total Barangay Clearance</th>
+                        <th style="padding: 10px; background-color: #299b63; color: #fff;">Total Business Clearance</th>
                         <th style="padding: 10px; background-color: #299b63; color: #fff;">Total Certificates Issued</th>
                     </tr>
                 </thead>
@@ -97,11 +117,18 @@
                             $month = date("F", mktime(0, 0, 0, $row1['month'], 1));
                             $count1 = $row1['count'];
 
-                            // Find the count from the $data2 array for the same month and year
                             $count2 = 0;
                             foreach ($data2 as $row2) {
                                 if ($row2['year'] == $year && $row2['month'] == $row1['month']) {
                                     $count2 = $row2['count'];
+                                    break;
+                                }
+                            }
+
+                            $count3 = 0;
+                            foreach ($data3 as $row3) {
+                                if ($row3['year'] == $year && $row3['month'] == $row3['month']) {
+                                    $count3 = $row3['count'];
                                     break;
                                 }
                             }
@@ -111,7 +138,8 @@
                             echo '<td style="padding: 10px; border: 1px solid #ccc;">' . $month . '</td>';
                             echo '<td style="padding: 10px; border: 1px solid #ccc;">' . $count1 . '</td>';
                             echo '<td style="padding: 10px; border: 1px solid #ccc;">' . $count2 . '</td>';
-                            echo '<td style="padding: 10px; border: 1px solid #ccc;">' . ($count1 + $count2) . '</td>';
+                            echo '<td style="padding: 10px; border: 1px solid #ccc;">' . $count3 . '</td>';
+                            echo '<td style="padding: 10px; border: 1px solid #ccc;">' . ($count1 + $count2 + $count3) . '</td>'; // Corrected
                             echo '</tr>';
                         }
                     ?>

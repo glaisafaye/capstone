@@ -7,7 +7,7 @@ $residentID = $_GET['resident_id']; // You might get the ID from the URL or else
 
 // Fetch the resident's name, clearanceNO, purpose, OR Number, date of birth, gender, and civil status from the database by joining the tables
 $query = "SELECT r.fname, r.lname, r.bday, r.gender, r.civStatus, c.clearanceNO, c.purpose, c.orNo FROM residents r
-          JOIN clearance1 c ON r.id = c.residentid
+          JOIN brgyclearance c ON r.id = c.residentid
           WHERE c.id = $residentID"; // Assuming 'c.id' is the primary key of your clearance1 table
 
 $result = $connection->query($query);

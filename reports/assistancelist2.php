@@ -90,15 +90,15 @@ include('db_connection.php');
         </div>
         <hr class="separator-line">
         <div class="title">List of Included in Cash4Work</div>
-        <div class="title">First Batch</div>
+        <div class="title">Second Batch</div>
         
         <?php
-        $sql = "SELECT resident_name FROM assistance_list LIMIT 1"; // Limit the query to the first row
+        $sql = "SELECT resident_name FROM assistance_list LIMIT 1, 1"; // Limit the query to the second row
         $result = $mysqli->query($sql);
         
         if ($result) {
             if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc(); // Fetch the first row
+                $row = $result->fetch_assoc(); // Fetch the second row
                 $residentNames = explode("\n", $row["resident_name"]); // Split names by newline character
                 $counter = 1; // Initialize a counter variable
                 foreach ($residentNames as $name) {
