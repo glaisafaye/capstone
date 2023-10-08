@@ -1,4 +1,4 @@
-<?php include 'layout.php'; ?>
+<?php include '../includes/layout.php'; ?>
 
 <!-- insert modal -->
 <div class="modal fade" id="insertdata" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="insertdataLabel" aria-hidden="true">
@@ -235,34 +235,34 @@
 <!-- edit modal -->
 
 
-<div class="container my-5">
-  <div class="d-flex justify-content-center mb-3">
-    <div class="col-md-10">
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
 
-      <?php
-        if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
-        ?>
-          <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Hey!</strong> <?php echo $_SESSION['status']; ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
         <?php
-          unset($_SESSION['status']);
-        }
-      ?>
+          if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+          ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong>Hey!</strong> <?php echo $_SESSION['status']; ?>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <?php
+            unset($_SESSION['status']);
+          }
+        ?>
 
-      <div class="container my-19">
-        <div class="d-flex justify-content-center mb-3">
-          <div class="col-md-10">
+      <div class="container my-5">
+        <div class="text-center mb-5">
+          <div class="col-md-10 mx-auto">
             <div class="card">
               <div class="card-header">
                 <h4 class="text-center"></h4>
-                <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#insertdata">
+                <button type="button" style="margin-bottom: 10px; margin-top: 10px;" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#insertdata">
                   Add Household
                 </button>
               </div>
               <div class="card-body">
-                <table class="table table-striped table-bordered table-success" id="myTable">
+                <table class="table table-striped table-bordered table-success" style="margin-bottom: 20px; margin-top: 20px;" id="myTable">
                   <thead>
                     <tr>
                       <th style="width: 50px !important;">ID#</th>
@@ -318,7 +318,7 @@
       </div>
     </div>
   </div>
-</div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>

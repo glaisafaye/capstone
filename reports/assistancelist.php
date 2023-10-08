@@ -10,7 +10,6 @@ include('db_connection.php');
             margin: 0;
         }
         @media print {
-            /* Hide the print button when printing */
             .print-button {
                 display: none;
             }
@@ -72,51 +71,59 @@ include('db_connection.php');
             font-weight: bold;
             margin-bottom: 20px;
         }
+        .modal-content-custom {
+            font-family: Arial, sans-serif;
+            width: 80%; 
+            max-height: 80vh; 
+            overflow-y: auto; 
+            padding: 2cm;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
-<div class="print-button" onclick="window.print()">Print</div>
-<div class="paper">
-    <div class="content">
-        <div class="header">
-            <img class="logo-left" src="logo1.JPG" alt="Left Logo">
-            <p>Republic of the Philippines<br>
-                PROVINCE OF BUKIDNON<br>
-                Municipality of Sumilao<br>
-                Barangay Puntian<br>
-                -o0o-<br>
-                OFFICE OF THE PUNONG BARANGAY</p>
-            <img class="logo-right" src="logo2.PNG" alt="Right Logo">
-        </div>
-        <hr class="separator-line">
-        <div class="title">List of Included in Cash4Work</div>
-        <div class="title">First Batch</div>
-        
-        <?php
-        $sql = "SELECT resident_name FROM assistance_list LIMIT 1"; // Limit the query to the first row
-        $result = $mysqli->query($sql);
-        
-        if ($result) {
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc(); // Fetch the first row
-                $residentNames = explode("\n", $row["resident_name"]); // Split names by newline character
-                $counter = 1; // Initialize a counter variable
-                foreach ($residentNames as $name) {
-                    $name = trim($name); // Trim any leading/trailing whitespace
-                    echo "<p>" . $counter . ". " . $name . "</p>"; // Display the name with a number
-                    $counter++; // Increment the counter
+    <div class="print-button" onclick="window.print()">Print</div>
+    <div class="paper">
+        <div class="content">
+            <div class="header">
+                <img class="logo-left" src="logo1.JPG" alt="Left Logo">
+                <p>Republic of the Philippines<br>
+                    PROVINCE OF BUKIDNON<br>
+                    Municipality of Sumilao<br>
+                    Barangay Puntian<br>
+                    -o0o-<br>
+                    OFFICE OF THE PUNONG BARANGAY</p>
+                <img class="logo-right" src="logo2.PNG" alt="Right Logo">
+            </div>
+            <hr class="separator-line">
+            <div class="title">List of Included in Cash4Work</div>
+            <div class="title">First Batch</div>
+            
+            <?php
+            $sql = "SELECT resident_name FROM assistance_list LIMIT 1"; 
+            $result = $mysqli->query($sql);
+            
+            if ($result) {
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc(); 
+                    $residentNames = explode("\n", $row["resident_name"]); 
+                    $counter = 1; 
+                    foreach ($residentNames as $name) {
+                        $name = trim($name);
+                        echo "<p>" . $counter . ". " . $name . "</p>"; 
+                        $counter++; 
+                    }
+                } else {
+                    echo "No records found";
                 }
+                $result->close();
             } else {
-                echo "No records found";
+                echo "Error executing the query: " . $mysqli->error;
             }
-            $result->close();
-        } else {
-            echo "Error executing the query: " . $mysqli->error;
-        }
-        
-        $mysqli->close();
-        ?>
+            
+            $mysqli->close();
+            ?>
+        </div>
     </div>
-</div>
 </body>
 </html>

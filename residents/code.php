@@ -8,7 +8,6 @@ if (isset($_POST['save_data'])) {
   $lname = $_POST["lname"];
   $fname = $_POST["fname"];
   $mname = $_POST["mname"];
-  $contactNum = $_POST["contactNum"];
   $gender = $_POST["gender"];
   $bday = $_POST["bday"];
   $civStatus = $_POST["civStatus"];
@@ -19,13 +18,12 @@ if (isset($_POST['save_data'])) {
   $relateToHead = $_POST["relateToHead"];
   $employStatus = $_POST["employStatus"];
   $religion = $_POST["religion"];
-  $income = $_POST["income"];
   $education = $_POST["education"];
-  $remarks = $_POST["remarks"];
   $nationality = $_POST["nationality"];
 
-  $insert_query = "INSERT INTO residents (`lname`, `fname`, `mname`, `contactNum`, `gender`, `civStatus`, `houseNum`, `abledPerson`, `zone`, `totalHouseMem`, `relateToHead`, `employStatus`, `religion`, `income`, `education`, `remarks`, `nationality`) 
-  VALUES ('$lname', '$fname', '$mname', '$contactNum', '$gender', '$civStatus', '$houseNum', '$abledPerson', '$zone', '$totalHouseMem', '$relateToHead', '$employStatus', '$religion', '$income', '$education', '$remarks', '$nationality')";
+  $insert_query = "INSERT INTO residents (`lname`, `fname`, `mname`, `gender`, `civStatus`, `houseNum`, `abledPerson`, `zone`, `totalHouseMem`, `relateToHead`, `employStatus`, `religion`, `education`, `nationality`) 
+VALUES ('$lname', '$fname', '$mname', '$gender', '$civStatus', '$houseNum', '$abledPerson', '$zone', '$totalHouseMem', '$relateToHead', '$employStatus', '$religion',  '$education', '$nationality')";
+
     $insert_query_run = mysqli_query($connection, $insert_query);
 
   if ($insert_query_run) {
@@ -53,7 +51,6 @@ if (isset($_POST['click_view_btn'])) {
       <h6>Last Name: ' .$row['lname' ]. '</h6>
       <h6>First Name: ' .$row['fname']. '</h6>
       <h6>Middle Name: ' .$row['mname']. '</h6>
-      <h6>Contact Number: ' .$row['contactNum']. '</h6>
       <h6>Gender: ' .$row['gender']. '</h6>
       <h6>Birthday: ' .$row['bday']. '</h6>
       <h6>Civil Status: ' .$row['civStatus']. '</h6>
@@ -64,9 +61,7 @@ if (isset($_POST['click_view_btn'])) {
       <h6>Relationship to Head: ' .$row['relateToHead']. '</h6>
       <h6>Employment Status:' .$row['employStatus']. '</h6>
       <h6>Religion:' .$row['religion']. '</h6>
-      <h6>Income:' .$row['income']. '</h6>
       <h6>Educational Attainment:' .$row['education']. '</h6>
-      <h6>Remarks:' .$row['remarks']. '</h6>
       <h6>Nationality:' .$row['nationality']. '</h6>
       ';
     }
@@ -106,7 +101,6 @@ if (isset($_POST['update_data'])) {
   $lname = $_POST["lname"];
   $fname = $_POST["fname"];
   $mname = $_POST["mname"];
-  $contactNum = $_POST["contactNum"];
   $gender = $_POST["gender"];
   $bday = $_POST["bday"];
   $civStatus = $_POST["civStatus"];
@@ -117,13 +111,11 @@ if (isset($_POST['update_data'])) {
   $relateToHead = $_POST["relateToHead"];
   $employStatus = $_POST["employStatus"];
   $religion = $_POST["religion"];
-  $income = $_POST["income"];
   $education = $_POST["education"];
-  $remarks = $_POST["remarks"];
   $nationality = $_POST["nationality"];
 
-
-  $update_query = "UPDATE residents SET lname='$lname', fname='$fname', mname='$mname', contactNum='$contactNum', gender='$gender', bday='$bday', civStatus='$civStatus', houseNum='$houseNum', abledPerson='$abledPerson', zone='$zone', totalHouseMem='$totalHouseMem', relateToHead='$relateToHead', employStatus='$employStatus', religion='$religion', income='$income', education='$education', remarks='$remarks', remarks='$remarks', nationality='$nationality' WHERE id ='id'";  $update_query_run = mysqli_query($connection, $update_query);
+  $update_query = "UPDATE residents SET lname='$lname', fname='$fname', mname='$mname', gender='$gender', bday='$bday', civStatus='$civStatus', houseNum='$houseNum', abledPerson='$abledPerson', zone='$zone', totalHouseMem='$totalHouseMem', relateToHead='$relateToHead', employStatus='$employStatus', religion='$religion', education='$education', nationality='$nationality' WHERE id = '$id'";
+  $update_query_run = mysqli_query($connection, $update_query);
 
   if($update_query_run)
   {

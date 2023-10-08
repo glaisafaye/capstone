@@ -1,4 +1,4 @@
-<?php include 'layout.php' ?>
+<?php include '../includes/layout.php'; ?>
 
 <!-- insert modal -->
 <div class="modal fade" id="insertdata" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="insertdataLabel" aria-hidden="true">
@@ -25,12 +25,8 @@
                 <input name="mname" class="form-control input-sm" type="text" placeholder="Enter Middle Name" />
               </div>
               <div class="form-group mb-3">
-                <label class="control-label">Contact Number:</label>
-                <input name="contactNum" class="form-control input-sm input-size" type="number" placeholder="Enter Contact Number" />
-              </div>
-              <div class="form-group mb-3">
                 <label class="control-label">Gender:</label>
-                <select name="gender" class="form-control input-sm">
+                <select name="gender" class="form-select">
                   <option selected="" disabled="">-----Select-----</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
@@ -38,7 +34,7 @@
               </div>
               <div class="form-group mb-3">
                 <label class="control-label">Civil Status:</label>
-                <select name="civStatus" type="text" class="form-control input-sm input-size">
+                <select name="civStatus" type="text" class="form-select">
                   <option selected="" disabled="">-----Select-----</option>
                   <option value="Single">Single</option>
                   <option value="Married">Married</option>
@@ -46,27 +42,27 @@
                   <option value="Widowed">Widowed</option>
                 </select>
               </div>
-            </div>
-            <div class="col-md-6">
               <div class="form-group mb-3">
                 <label class="control-label">Birthday:</label>
-                <input name="bday" class="form-control input-sm input-size" type="date" />
+                <input name="bday" class="form-select" type="date" />
               </div>
               <div class="form-group mb-3">
                 <label class="control-label">Household Number:</label>
-                <input name="houseNum" class="form-control input-sm input-size" type="number" min="1" placeholder="Enter Household Number" />
+                <input name="houseNum" class="form-control input-sm" type="text" placeholder="Enter Household Number" />
               </div>
               <div class="form-group mb-3">
                 <label class="control-label">Differently-abled Person:</label>
-                <select name="abledPerson" class="form-control input-sm input-size">
+                <select name="abledPerson" class="form-select">
                   <option selected="" disabled="">-----Select-----</option>
                   <option value="Yes">Yes</option>
                   <option value="No">No</option>
                 </select>
               </div>
+            </div>
+            <div class="col-md-6">
               <div class="form-group mb-3">
                 <label class="control-label">Zone:</label>
-                <select name="zone" class="form-control input-sm input-size">
+                <select name="zone" class="form-select">
                   <option selected="" disabled="">-Select Zone-</option>
                   <option value="Zone 1">Zone 1</option>
                   <option value="Zone 2">Zone 2</option>
@@ -77,19 +73,15 @@
               </div>
               <div class="form-group mb-3">
                 <label class="control-label">Total Household Member:</label>
-                <input name="totalHouseMem" class="form-control input-sm" type="number" min="1" placeholder="Enter Total Household Member" />
+                <input name="totalHouseMem" class="form-control input-sm" type="number" min="1" placeholder="Total Household Member" />
               </div>
               <div class="form-group mb-3">
                 <label class="control-label">Relationship to Head:</label>
                 <input name="relateToHead" class="form-control input-sm" type="text" placeholder="Enter Relationship to Head" />
               </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
               <div class="form-group mb-3">
                 <label class="control-label">Employment Status:</label>
-                <select name="employStatus" class="form-control input-sm">
+                <select name="employStatus" class="form-select">
                   <option selected="" disabled="">-----Select-----</option>
                   <option value="Employed">Employed</option>
                   <option value="Unemployed">Unemployed</option>
@@ -100,16 +92,10 @@
                 <input name="religion" class="form-control input-sm" type="text" placeholder="Enter Religion" />
               </div>
               <div class="form-group mb-3">
-                <label class="control-label">Income:</label>
-                <input name="income" class="form-control input-sm" type="number" placeholder="Enter Income" />
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group mb-3">
                 <label class="control-label">Educational Attainment:</label>
-                <select name="education" class="form-control input-sm input-size">
+                <select name="education" class="form-select">
                   <option selected="" disabled="">-----Select-----</option>
-                  <option value="none">None</option>
+                  <option value="None">None</option>
                   <option value="Elementary Level">Elementary Level</option>
                   <option value="Elementary Graduate">Elementary Graduate</option>
                   <option value="High School_Level">High School Level</option>
@@ -119,10 +105,6 @@
                   <option value="College Level">College Level</option>
                   <option value="College Graduate">College Graduate</option>
                 </select>
-              </div>
-              <div class="form-group mb-3">
-                <label class="control-label">Remarks:</label>
-                <input name="remarks" class="form-control input-sm input-size" type="text" placeholder="Enter Remarks" />
               </div>
               <div class="form-group">
                 <label class="control-label">Nationality:</label>
@@ -171,62 +153,58 @@
       <form action="code.php" method="POST">
         <div class="modal-body">
 
-        <input type="hidden" class="form-control" id="user_id" name="id">
+          <input type="hidden" class="form-control" id="user_id" name="id">
 
           <div class="row">
             <div class="col-md-6">
               <div class="form-group mb-3">
                 <label class="control-label">Last Name:</label>
-                <input name="lname" class="form-control input-sm" id="lname" type="text" placeholder="Last Name" />
+                <input type="text" class="form-control input-sm" name="lname" id="lname" placeholder="Enter Last Name">
               </div>
               <div class="form-group mb-3">
                 <label class="control-label">First Name:</label>
-                <input name="fname" class="form-control input-sm" type="text" id="fname" placeholder="First Name" />
+                <input type="text" class="form-control input-sm" name="fname" id="fname" placeholder="Enter First Name">
               </div>
               <div class="form-group mb-3">
                 <label class="control-label">Middle Name:</label>
-                <input name="mname" class="form-control input-sm" type="text" id="mname" placeholder="Middle Name" />
-              </div>
-              <div class="form-group mb-3">
-                <label class="control-label">Contact Number:</label>
-                <input name="contactNum" class="form-control input-sm" id="contactNum" type="text" placeholder="Contact Number" />
+                <input type="text" class="form-control input-sm" name="mname" id="mname" placeholder="Enter Middle Name">
               </div>
               <div class="form-group mb-3">
                 <label class="control-label">Gender:</label>
-                <select name="gender" id="gender" class="form-control input-sm">
+                <select class="form-select" name="gender" id="gender" placeholder="Enter Gender">
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
               </div>
               <div class="form-group mb-3">
                 <label class="control-label">Civil Status:</label>
-                <select name="civStatus" id="civStatus" class="form-control input-sm input-size">
+                <select class="form-select" name="civStatus" id="civStatus" placeholder="Enter Civil Status">
                   <option value="Single">Single</option>
                   <option value="Married">Married</option>
                   <option value="Divorced">Divorced</option>
                   <option value="Widowed">Widowed</option>
                 </select>
               </div>
-            </div>
-            <div class="col-md-6">
               <div class="form-group mb-3">
                 <label class="control-label">Birthday:</label>
-                <input name="bday" class="form-control input-sm input-size" id="bday" type="date" />
+                <input type="date" class="form-control input-sm input-size" name="bday" id="bday" placeholder="Enter Birthday">
               </div>
               <div class="form-group mb-3">
                 <label class="control-label">Household Number:</label>
-                <input name="houseNum" class="form-control input-sm" type="text" id="houseNum" placeholder="Household Number" />
+                <input type="text" class="form-control input-sm" name="houseNum" id="houseNum" placeholder="Household Number">
               </div>
               <div class="form-group mb-3">
                 <label class="control-label">Differently-abled Person:</label>
-                <select name="abledPerson" id="abledPerson" class="form-control input-sm input-size">
+                <select class="form-select" name="abledPerson" id="abledPerson" placeholder="Differently-abled Person">
                   <option value="Yes">Yes</option>
                   <option value="No">No</option>
                 </select>
               </div>
+            </div>
+            <div class="col-md-6">
               <div class="form-group mb-3">
                 <label class="control-label">Zone:</label>
-                <select name="zone" id="zone" class="form-control input-sm input-size">
+                <select class="form-select" name="zone" id="zone" placeholder="Enter Zone">
                   <option value="Zone 1">Zone 1</option>
                   <option value="Zone 2">Zone 2</option>
                   <option value="Zone 3">Zone 3</option>
@@ -236,37 +214,27 @@
               </div>
               <div class="form-group mb-3">
                 <label class="control-label">Total Household Member:</label>
-                <input name="totalHouseMem" class="form-control input-sm" type="text" id="totalHouseMem" min="1" placeholder="Total Household Member" />
+                <input type="text" class="form-control input-sm" name="totalHouseMem" id="totalHouseMem" min="1" placeholder="Total Household Member">
               </div>
               <div class="form-group mb-3">
                 <label class="control-label">Relationship to Head:</label>
-                <input name="relateToHead" class="form-control input-sm" id="relateToHead" type="text" placeholder="Relationship to Head" />
+                <input type="text" class="form-control input-sm" name="relateToHead" id="relateToHead" placeholder="Enter Relationship to Head">
               </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
               <div class="form-group mb-3">
                 <label class="control-label">Employment Status:</label>
-                <select name="employStatus" id="employStatus" class="form-control input-sm">
+                <select class="form-select" name="employStatus" id="employStatus" placeholder="Enter Employment Status">
                   <option value="Employed">Employed</option>
                   <option value="Unemployed">Unemployed</option>
                 </select>
               </div>
               <div class="form-group mb-3">
                 <label class="control-label">Religion:</label>
-                <input name="religion" class="form-control input-sm" id="religion" type="text" placeholder="Religion" />
+                <input type="text" class="form-control input-sm" name="religion" id="religion" placeholder="Enter Religion">
               </div>
-              <div class="form-group mb-3">
-                <label class="control-label">Income:</label>
-                <input name="income" class="form-control input-sm" id="income" type="number" placeholder="Income" />
-              </div>
-            </div>
-            <div class="col-md-6">
               <div class="form-group mb-3">
                 <label class="control-label">Educational Attainment:</label>
-                <select name="education" id="education" class="form-control input-sm input-size">
-                  <option value="none">None</option>
+                <select class="form-select" name="education" id="education" placeholder="Enter Educational Attainment">
+                  <option value="None">None</option>
                   <option value="Elementary Level">Elementary Level</option>
                   <option value="Elementary Graduate">Elementary Graduate</option>
                   <option value="High School_Level">High School Level</option>
@@ -277,13 +245,9 @@
                   <option value="College Graduate">College Graduate</option>
                 </select>
               </div>
-              <div class="form-group mb-3">
-                <label class="control-label">Remarks:</label>
-                <input name="remarks" class="form-control input-sm input-size" id="remarks" type="text" placeholder="Remarks" />
-              </div>
               <div class="form-group">
                 <label class="control-label">Nationality:</label>
-                <input name="nationality" class="form-control input-sm input-size" id="nationality" type="text" placeholder="Nationality" />
+                <input type="text" class="form-control input-sm input-size" name="nationality" id="nationality" placeholder="Enter Nationality">
               </div>
             </div>
           </div>
@@ -313,19 +277,19 @@
         unset($_SESSION['status']);
       }
       ?>
-      <div class="container my-20">
-        <div class="d-flex justify-content-center mb-3">
-          <div class="col-md-10">
 
+      <div class="container my-5">
+        <div class="text-center mb-5">
+          <div class="col-md-10 mx-auto">
             <div class="card">
               <div class="card-header">
                 <h4 class="text-center"></h4>
-                <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#insertdata">
+                <button type="button" style="margin-bottom: 10px; margin-top: 10px;" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#insertdata">
                   Add Resident
                 </button>
               </div>
               <div class="card-body">
-                <table class="table table-striped table-bordered table-success" id="myTable">
+                <table class="table table-striped table-bordered table-success" style="margin-bottom: 20px; margin-top: 20px;" id="myTable">
                   <thead>
                     <tr>
                       <th scope="col">ID#</th>
@@ -438,13 +402,12 @@
 
           $.each(response, function(Key, value) {
 
-            /*console.log(value['houseNum'])*/
+            /*console.log(value['lname'])*/
 
             $('#user_id').val(value['id']);
             $('#lname').val(value['lname']);
             $('#fname').val(value['fname']);
             $('#mname').val(value['mname']);
-            $('#contactNum').val(value['contactNum']);
             $('#gender').val(value['gender']);
             $('#bday').val(value['bday']);
             $('#civStatus').val(value['civStatus']);
@@ -455,9 +418,7 @@
             $('#relateToHead').val(value['relateToHead']);
             $('#employStatus').val(value['employStatus']);
             $('#religion').val(value['religion']);
-            $('#income').val(value['income']);
             $('#education').val(value['education']);
-            $('#remarks').val(value['remarks']);
             $('#nationality').val(value['nationality']);
           });
 

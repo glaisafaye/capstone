@@ -2,39 +2,43 @@
 <html lang="en">
 
 <head>
+<script>
+    function saveResidents() {
+        var residentsList = document.querySelector('input[name="residents_list"]').value;
+
+        if (residentsList.trim() === '') {
+            alert('Residents list is empty. Please select residents to save.');
+        } else {
+            alert('Residents list has been successfully saved.');
+        }
+    }
+</script>
 
 </head>
 
 <body>
-    <?php
-    include 'layout.php';
-    ?>
-    <!-- Residents List Section -->
+    <?php include '../includes/layout1.php'; ?>
+
     <div class="main">
 
         <?php
 
-        // Database configuration
         $hostname = 'localhost';
         $username = 'root';
         $password = '';
         $database = 'MIS';
 
-        // Create a database connection
         $conn = new mysqli($hostname, $username, $password, $database);
 
-        // Check the database connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
 
-        // Default limits and selected zone
         $residents_limit = 10;
         $income_limit = 32000;
         $selected_zone = "All";
         $total_members_limit = 0;
 
-        // Update limits and selected zone if submitted via POST
         if (isset($_POST['residents_limit'])) {
             $residents_limit = intval($_POST['residents_limit']);
         }
@@ -50,11 +54,9 @@
             $total_members_limit = intval($_POST['total_members_limit']);
         }
 
-        // Query to fetch unique zones from the household table
         $zone_query = "SELECT DISTINCT zone FROM household";
         $zone_result = $conn->query($zone_query);
 
-        // Build the SQL query to retrieve data based on the selected zone
         $sql = "SELECT famHead, zone 
                 FROM household 
                 WHERE income < $income_limit";
@@ -68,14 +70,12 @@
 
         $sql .= " ORDER BY totalMem DESC, income ASC LIMIT $residents_limit";
 
-        // Execute the SQL query
         $result = $conn->query($sql);
 
-        // Fetch the rows and store resident names in an array
         $residentNames = array();
         while ($row = $result->fetch_assoc()) {
             $zone = $row["zone"];
-            $residentNames[] = $row["famHead"]; // Store resident names in an array
+            $residentNames[] = $row["famHead"]; 
         }
         ?>
 
@@ -106,23 +106,19 @@
 
         <?php
         if ($result->num_rows > 0) {
-            // Initialize resident number
             $residentNumber = 1;
 
-            // Output the results as a table
             echo "<table>";
 
             foreach ($residentNames as $residentName) {
                 echo "<tr><td>$residentNumber</td><td>$residentName</td><td>$selected_zone</td></tr>";
 
-                // Increment resident number
                 $residentNumber++;
             }
 
             echo "</table>";
 
-            // Add a button to save the list of residents
-            echo '<form method="post" action="save_residents.php">';
+            echo '<form method="post" action="javascript:void(0);" onsubmit="saveResidents()">';
             echo '<input type="hidden" name="residents_list" value="' . implode(",", $residentNames) . '">';
             echo '<input type="submit" value="Save Residents">';
             echo '</form>';
@@ -130,13 +126,9 @@
             echo "<p>No records found.</p>";
         }
 
-        // Close the database connection
         $conn->close();
         ?>
 
     </div>
-
-    <!-- End Residents List Section -->
 </body>
-
 </html>

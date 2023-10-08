@@ -1,4 +1,4 @@
-<?php include 'layout.php' ?>
+<?php include '../includes/layout.php'; ?>
 
 <!-- insert data -->
 <div class="modal fade" id="insertdata" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="insertdataLabel" aria-hidden="true">
@@ -12,7 +12,7 @@
         <div class="modal-body">
           <div class="form-group mb-3">
             <label class="control-label">Position:</label>
-            <select name="position" class="form-control input-sm input-size">
+            <select name="position" class="form-select">
               <option selected="" disabled="">-----Select-----</option>
               <option value="Punong Barangay">Punong Barangay</option>
               <option value="Barangay Kagawad">Barangay Kagawad</option>
@@ -34,7 +34,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save Data</button>
+          <button type="submit" name="save_data" class="btn btn-primary">Save Data</button>
         </div>
       </form>
     </div>
@@ -76,7 +76,7 @@
           </div>
           <div class="form-group mb-3">
             <label class="control-label">Position:</label>
-            <select name="position" class="form-control input-sm input-size" id="position">
+            <select name="position" class="form-select" id="position">
               <option selected="" disabled="">-----Select-----</option>
               <option value="Punong Barangay">Punong Barangay</option>
               <option value="Barangay Kagawad">Barangay Kagawad</option>
@@ -121,26 +121,26 @@
         unset($_SESSION['status']);
       }
       ?>
-      <div class="container my-19">
-        <div class="d-flex justify-content-center mb-5">
-          <div class="col-md-9">
+      <div class="container my-5">
+        <div class="text-center mb-5">
+          <div class="col-md-10 mx-auto">
             <div class="card">
               <div class="card-header">
                 <h4 class="text-center"></h4>
-                <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#insertdata">
+                <button type="button" style="margin-bottom: 10px; margin-top: 10px;" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#insertdata">
                   Add Barangay Official
                 </button>
               </div>
               <div class="card-body">
-                <table class="table table-striped table-bordered table-success" id="myTable">
+                <table class="table table-striped table-bordered table-success" style="margin-bottom: 20px; margin-top: 20px;" id="myTable">
                   <thead>
                     <tr>
                       <th style="width: 50px !important;">ID#</th>
-                      <th style="width: 140px !important;">Position</th>
-                      <th style="width: 180px !important;">Name</th>
+                      <th style="width: 130px !important;">Position</th>
+                      <th style="width: 150px !important;">Name</th>
                       <th style="width: 100px !important;">Contact Number</th>
                       <th style="width: 50px !important;">Status</th>
-                      <th style="width: 100px !important;">Action</th>
+                      <th style="width: 80px !important;">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -164,15 +164,15 @@
                           <td>
                             <?php
                               if ($row['status'] == 1) {
-                                  echo '<p><a href="active.php?id=' . $row['id'] . '&status=0" class="btn btn-success active-status">Active</a></p>';
+                                  echo '<p><a href="active.php?id=' . $row['id'] . '&status=0" class="btn btn-success btn-sm active-status">Active</a></p>';
                               } else {
-                                  echo '<p><a href="active.php?id=' . $row['id'] . '&status=1" class="btn btn-danger inactive-status">Inactive</a></p>';
+                                  echo '<p><a href="active.php?id=' . $row['id'] . '&status=1" class="btn btn-danger btn-sm inactive-status">Inactive</a></p>';
                               }
                               ?>
                           </td>
                           <td>
-                              <a href="#" class="btn btn-info view_data">View</a>
-                              <a href="#" class="btn btn-success edit_data">Edit</a>
+                              <a href="#" class="btn btn-info btn-sm view_data">View</a>
+                              <a href="#" class="btn btn-success btn-sm edit_data">Edit</a>
                           </td>
                         </tr>
 
